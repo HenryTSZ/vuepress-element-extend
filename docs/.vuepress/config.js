@@ -7,12 +7,12 @@ function resolve(dir) {
 const demoBlock = require('./plugins/demo-block')
 
 module.exports = {
-  title: 'VuePress-ElementUI-extend',
+  title: 'VuePress-ElementUI-Template',
   description: 'Based on the VuePress and ElementUI documentation',
+  head: [['link', { rel: 'icon', href: '/logo.png' }]],
   alias: {
     public: resolve('public'),
-    styles: resolve('styles'),
-    utils: resolve('utils')
+    styles: resolve('styles')
   },
   locales: {
     '/': {
@@ -21,7 +21,7 @@ module.exports = {
   },
   themeConfig: {
     prismTheme: 'solarizedlight',
-    logo: '/hero.png',
+    logo: '/logo.png',
     nav: [
       { text: 'Home', link: '/' },
       { text: 'ElementUI', link: '/ElementUI/' },
@@ -32,7 +32,7 @@ module.exports = {
         {
           title: 'ElementUI',
           collapsable: false,
-          children: ['', 'BaseForm']
+          children: ['', 'Radio']
         }
       ]
     },

@@ -1,20 +1,22 @@
 {
-  "name": "vuepress-element-extend",
+  "name": "vuepress-element-extend-template",
   "version": "1.0.0",
-  "description": "",
+  "description": "based-VuePress-building-a-similar-ElementUi-document",
   "main": "index.js",
   "scripts": {
     "dev": "vuepress dev docs",
     "build": "vuepress build docs"
   },
-  "keywords": [],
+  "keywords": [
+    "VuePress",
+    "ElementUi",
+    "Document"
+  ],
   "author": "HenryTSZ",
   "license": "ISC",
   "dependencies": {
-    "echarts": "^4.8.0",
     "element-ui": "^2.13.2",
-    "vue": "^2.5.16",
-    "vue-echarts": "^5.0.0-beta.0"
+    "vue": "^2.5.16"
   },
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.5.4",
