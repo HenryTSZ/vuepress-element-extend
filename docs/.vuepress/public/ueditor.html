@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/video-js/video-js.min.css" />
+    <script src="/video-js/video.js"></script>
+    <style type="text/css">
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="uePreview"></div>
+  </body>
+  <script>
+    var params = getParams()
+    document.getElementById('uePreview').innerHTML = sessionStorage.getItem(params.id)
+    setTimeout(function() {
+      var videoDom = document.querySelector('.video-js')
+      if (videoDom) {
+        videojs(videoDom)
+      }
+    }, 100)
+    function getParams() {
+      var ret = {},
+        seg = window.location.search.replace(/^\?/, '').split('&'),
+        len = seg.length,
+        i = 0,
+        s
+      for (; i < len; i++) {
+        if (!seg[i]) {
+          continue
+        }
+        s = seg[i].split('=')
+        ret[s[0]] = s[1]
+      }
+      return ret
+    }
+  </script>
+</html>

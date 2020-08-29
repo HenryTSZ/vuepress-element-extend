@@ -1,0 +1,87 @@
+// [Change the code block background and text · Issue #2223 · vuejs/vuepress](https://github.com/vuejs/vuepress/issues/2223)
+@import '~styles/prism-solarizedlight.css'
+@import '~styles/scroll.styl'
+
+// 自定义类样式
+html,
+body,
+#app
+  width 100%
+  height 100%
+
+.tm
+  display inline-block
+  width 100%
+  overflow hidden
+  text-overflow ellipsis
+  white-space nowrap
+
+.fl
+  float left
+
+.fr
+  float right
+
+.h100
+  height 100%
+
+// 修改 default theme 样式
+table
+  display table
+  tr
+    border none
+    &:nth-child(2n)
+      background inherit
+  th, td
+    border none
+.page
+  .theme-default-content
+    & > table
+      border-collapse collapse
+      width 100%
+      background-color #fff
+      font-size 14px
+      margin-bottom 45px
+      line-height 1.5em
+      strong
+        font-weight 400
+      th
+        text-align left
+        white-space nowrap
+        color #909399
+        font-weight 400
+      td
+        color #606266
+      td, th
+        border-bottom 1px solid #dcdfe6
+        padding 15px
+        max-width 250px
+        &:first-child
+          padding-left 10px
+
+.theme-default-content
+  pre, pre[class*="language-"]
+    margin -0.35rem 0
+    code
+      color #000
+
+// 修改 ElementUI 样式
+.el-dialog__header
+  border 1px solid #e9eaec
+
+.el-dialog__body
+  padding 20px
+
+.el-dialog__footer
+  padding 0 20px 20px
+
+.el-tabs--border-card > .el-tabs__header .el-tabs__item
+  color #303133
+
+.el-tree
+  .el-tree-node__content
+    height 36px
+    line-height 36px
+
+.el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content
+  background #c5e6ff
