@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /hero.png
+heroImage: /logo.png
 heroText: null
 tagline: 本项目是基于 VuePress 搭建. 封装扩展了一些 ElementUI 组件、ECharts 组件及第三方组件. 包含了一些常用的工具类, 自定义插件, 测试 Demo 等
 actionText: 快速上手 →

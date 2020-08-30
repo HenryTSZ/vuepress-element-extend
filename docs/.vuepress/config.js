@@ -9,6 +9,9 @@ const demoBlock = require('./plugins/demo-block')
 module.exports = {
   title: 'VuePress-ElementUI-extend',
   description: 'Based on the VuePress and ElementUI documentation',
+  head: [
+    ['link', { rel: 'icon', href: '/logo.png' }]
+  ],
   alias: {
     public: resolve('public'),
     styles: resolve('styles'),
@@ -20,8 +23,7 @@ module.exports = {
     }
   },
   themeConfig: {
-    prismTheme: 'solarizedlight',
-    logo: '/hero.png',
+    logo: '/logo.png',
     nav: [
       { text: 'Home', link: '/' },
       { text: 'ElementUI', link: '/ElementUI/' },
