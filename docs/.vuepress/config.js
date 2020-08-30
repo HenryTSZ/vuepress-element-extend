@@ -20,19 +20,18 @@ module.exports = {
     }
   },
   themeConfig: {
-    prismTheme: 'solarizedlight',
     logo: '/logo.png',
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'ElementUI', link: '/ElementUI/' },
-      { text: 'Blog', link: 'https://tsz.now.sh' }
+      { text: 'Guide', link: '/Guide/' },
+      { text: 'Github', link: 'https://github.com/HenryTSZ/vuepress-element-extend/tree/template' }
     ],
     sidebar: {
-      '/ElementUI/': [
+      '/Guide/': [
         {
-          title: 'ElementUI',
+          title: '指南',
           collapsable: false,
-          children: ['', 'Radio']
+          children: ['', 'started', 'options', 'Radio']
         }
       ]
     },

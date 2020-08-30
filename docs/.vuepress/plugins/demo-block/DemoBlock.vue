@@ -9,10 +9,10 @@
       <slot name="demo"></slot>
     </div>
     <div class="meta" ref="meta">
-      <div class="description" v-if="$slots.description">
+      <div class="description" ref="description" v-if="$slots.description">
         <slot name="description"></slot>
       </div>
-      <div class="code-content">
+      <div class="code-content" ref="codeContent">
         <slot name="source"></slot>
       </div>
     </div>
@@ -68,7 +68,7 @@ export default {
       return this.options.locales || defaultLang
     },
     langConfig() {
-      return this.compoLang.filter(config => config.lang === this.$lang)[0]['demo-block']
+      return this.compoLang.find(config => config.lang === this.$lang)['demo-block']
     },
     blockClass() {
       return `demo-${this.$lang} demo-${this.$router.currentRoute.path.split('/').pop()}`
@@ -83,17 +83,22 @@ export default {
       return this.copied ? this.langConfig['copy-success'] : this.langConfig['copy-text']
     },
     codeArea() {
-      return this.$el.getElementsByClassName('meta')[0]
+      return this.$refs.meta
+    },
+    codeDescription() {
+      return this.$refs.description
+    },
+    codeContent() {
+      return this.$refs.codeContent
+    },
+    codeControl() {
+      return this.$refs.control
     },
     codeAreaHeight() {
-      if (this.$el.getElementsByClassName('description').length > 0) {
-        return (
-          this.$el.getElementsByClassName('description')[0].clientHeight +
-          this.$el.getElementsByClassName('code-content')[0].clientHeight +
-          20
-        )
+      if (this.codeDescription) {
+        return this.codeDescription.clientHeight + this.codeContent.clientHeight + 20
       }
-      return this.$el.getElementsByClassName('code-content')[0].clientHeight
+      return this.codeContent.clientHeight
     }
   },
   methods: {
@@ -112,11 +117,10 @@ export default {
       }, 1500)
     },
     scrollHandler() {
-      const { top, bottom, left } = this.$refs.meta.getBoundingClientRect()
-      this.fixedControl =
-        bottom > document.documentElement.clientHeight &&
-        top + 44 <= document.documentElement.clientHeight
-      this.$refs.control.style.left = this.fixedControl ? `${left}px` : '0'
+      const { top, bottom, left } = this.codeArea.getBoundingClientRect()
+      const documentClientHeight = document.documentElement.clientHeight
+      this.fixedControl = bottom > documentClientHeight && top + 44 <= documentClientHeight
+      this.codeControl.style.left = this.fixedControl ? `${left}px` : '0'
     },
     removeScrollHandler() {
       this.scrollParent && this.scrollParent.removeEventListener('scroll', this.scrollHandler)
@@ -127,7 +131,7 @@ export default {
       this.codeArea.style.height = val ? `${this.codeAreaHeight + 1}px` : '0'
       if (!val) {
         this.fixedControl = false
-        this.$refs.control.style.left = '0'
+        this.codeControl.style.left = '0'
         this.removeScrollHandler()
         return
       }
@@ -140,11 +144,10 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      let codeContent = this.$el.getElementsByClassName('code-content')[0]
       this.codeContentWidth = this.$el.offsetWidth
-      if (this.$el.getElementsByClassName('description').length === 0) {
-        codeContent.style.width = '100%'
-        codeContent.borderRight = 'none'
+      if (!this.codeDescription) {
+        this.codeContent.style.width = '100%'
+        this.codeContent.borderRight = 'none'
       }
     })
   },
