@@ -9,9 +9,7 @@ const demoBlock = require('./plugins/demo-block')
 module.exports = {
   title: 'VuePress-ElementUI-extend',
   description: 'Based on the VuePress and ElementUI documentation',
-  head: [
-    ['link', { rel: 'icon', href: '/logo.png' }]
-  ],
+  head: [['link', { rel: 'icon', href: '/logo.png' }]],
   alias: {
     public: resolve('public'),
     styles: resolve('styles'),
@@ -38,19 +36,27 @@ module.exports = {
         }
       ]
     },
-    sidebarDepth: 2
+    sidebarDepth: 2,
+    repo: 'HenryTSZ/vuepress-element-extend',
+    repoLabel: 'GitHub',
+    docsDir: 'docs',
+    editLinks: true,
+    editLinkText: '在 GitHub 上编辑此页',
+    lastUpdated: '最近更新时间'
   },
   plugins: [
     demoBlock,
-    '@vuepress/plugin-back-to-top',
+    '@vuepress/back-to-top',
     [
       '@vuepress/search',
       {
         searchMaxSuggestions: 10
       }
-    ]
+    ],
+    '@vuepress/nprogress',
+    '@vuepress/last-updated',
+    'vuepress-plugin-smooth-scroll'
   ],
   evergreen: true,
-  lastUpdated: '最近更新时间',
   smoothScroll: true
 }
