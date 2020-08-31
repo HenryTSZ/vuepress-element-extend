@@ -23,8 +23,7 @@ module.exports = {
     logo: '/logo.png',
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Guide', link: '/Guide/' },
-      { text: 'Github', link: 'https://github.com/HenryTSZ/vuepress-element-extend/tree/template' }
+      { text: 'Guide', link: '/Guide/' }
     ],
     sidebar: {
       '/Guide/': [
@@ -35,7 +34,15 @@ module.exports = {
         }
       ]
     },
-    sidebarDepth: 2
+    sidebarDepth: 2,
+    repo: 'HenryTSZ/vuepress-element-extend/tree/template',
+    repoLabel: 'GitHub',
+    docsRepo: 'HenryTSZ/vuepress-element-extend/',
+    docsDir: 'docs',
+    docsBranch: 'template',
+    editLinks: true,
+    editLinkText: '在 GitHub 上编辑此页',
+    lastUpdated: '最近更新时间'
   },
   plugins: [
     demoBlock,
@@ -45,9 +52,11 @@ module.exports = {
       {
         searchMaxSuggestions: 10
       }
-    ]
+    ],
+    '@vuepress/nprogress',
+    '@vuepress/last-updated',
+    'vuepress-plugin-smooth-scroll'
   ],
   evergreen: true,
-  lastUpdated: '最近更新时间',
   smoothScroll: true
 }
