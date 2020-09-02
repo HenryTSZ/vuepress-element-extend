@@ -11,7 +11,7 @@
 ````html
 ::: demo 此处放置代码示例的描述信息, 支持 `Markdown` 语法, **描述信息只支持单行**
 
-```html
+```vue
 <template>
   <el-radio v-model="radio" label="1">备选项</el-radio>
   <el-radio v-model="radio" label="2">备选项</el-radio>
@@ -35,7 +35,7 @@
 
 ::: demo 此处放置代码示例的描述信息，支持 `Markdown` 语法，**描述信息只支持单行**
 
-```html
+```vue
 <template>
   <el-radio v-model="radio" label="1">备选项</el-radio>
   <el-radio v-model="radio" label="2">备选项</el-radio>

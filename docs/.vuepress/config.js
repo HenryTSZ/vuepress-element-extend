@@ -23,7 +23,8 @@ module.exports = {
     logo: '/logo.png',
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Guide', link: '/Guide/' }
+      { text: 'Guide', link: '/Guide/' },
+      { text: 'VuePress', link: 'https://vuepress.vuejs.org/zh/' }
     ],
     sidebar: {
       '/Guide/': [
