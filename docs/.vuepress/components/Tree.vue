@@ -3,7 +3,7 @@
  * @Date: 2020-01-31 11:15:30
  * @Description: https://vue-element-extend.now.sh/#/element-ui/TreeDemo
  * @LastEditors: HenryTSZ
- * @LastEditTime: 2020-09-09 10:33:42
+ * @LastEditTime: 2020-09-15 10:32:07
  -->
 <template>
   <div class="b-tree">
@@ -32,6 +32,7 @@
         <text-ellipsis
           :class="{ 'custom-disabled': node.disabled }"
           :content="node.label"
+          v-bind="textEllipsisProps"
         ></text-ellipsis>
       </slot>
     </el-tree>
@@ -90,6 +91,12 @@ export default {
     level: {
       type: Number,
       default: 1
+    },
+    textEllipsisProps: {
+      type: Object,
+      default() {
+        return {}
+      }
     }
   },
   data() {
@@ -180,7 +187,7 @@ export default {
       this.isIndeterminate = false
       let checkedKeys = []
       if (this.checkAll) {
-        const checkedNodes = this.allNodes.filter(({ visible }) => visible)
+        const checkedNodes = this.allNodes.filter(({ visible, disabled }) => visible && !disabled)
         checkedKeys = checkedNodes.map(({ key }) => key)
         this.$emit(
           'check',
@@ -219,7 +226,9 @@ export default {
       this.timeout = setTimeout(func, wait)
     },
     handleCheckAllStatus() {
-      const allNodes = this.allNodes.filter(({ level, visible }) => level === 1 && visible)
+      const allNodes = this.allNodes.filter(
+        ({ level, visible, disabled }) => level === 1 && visible && !disabled
+      )
       // 关于 filter 的说明:
       // 全选的状态其实只和根节点的状态有关, 而且也处理了 set 方法中 leafOnly 为 true 的情况
       // visible 结合过滤使用

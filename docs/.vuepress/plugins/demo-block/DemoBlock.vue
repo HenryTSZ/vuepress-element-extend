@@ -63,6 +63,7 @@ export default {
   },
   computed: {
     compoLang() {
+      console.log('compoLang -> this.options', this.options)
       return this.options.locales || defaultLang
     },
     langConfig() {
@@ -191,6 +192,10 @@ export default {
     word-break: break-word;
     margin: 10px;
     background-color: #fff;
+    code {
+      color: #5e6d82;
+      background-color: #e6effb;
+    }
   }
   .demo-block-control {
     border-top: solid 1px #eaeefb;

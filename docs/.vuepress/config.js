@@ -9,7 +9,17 @@ const demoBlock = require('./plugins/demo-block')
 module.exports = {
   title: 'VuePress-ElementUI-extend',
   description: 'Based on the VuePress and ElementUI documentation',
-  head: [['link', { rel: 'icon', href: '/logo.png' }]],
+  head: [
+    ['link', { rel: 'icon', href: '/logo.png' }],
+    ['link', { rel: 'manifest', href: '/manifest.json' }],
+    ['meta', { name: 'theme-color', content: '#3eaf7c' }],
+    ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
+    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
+    ['link', { rel: 'apple-touch-icon', href: `/icons/apple-touch-icon-152x152.png` }],
+    ['link', { rel: 'mask-icon', href: '/icons/safari-pinned-tab.svg', color: '#3eaf7c' }],
+    ['meta', { name: 'msapplication-TileImage', content: '/icons/msapplication-icon-144x144.png' }],
+    ['meta', { name: 'msapplication-TileColor', content: '#000000' }]
+  ],
   alias: {
     public: resolve('public'),
     styles: resolve('styles'),
@@ -32,7 +42,7 @@ module.exports = {
         {
           title: 'ElementUI',
           collapsable: false,
-          children: ['', 'BaseForm']
+          children: ['', 'TextEllipsis', 'Tree', 'BaseForm']
         }
       ]
     },
@@ -55,7 +65,14 @@ module.exports = {
     ],
     '@vuepress/nprogress',
     '@vuepress/last-updated',
-    'vuepress-plugin-smooth-scroll'
+    'vuepress-plugin-smooth-scroll',
+    [
+      '@vuepress/pwa',
+      {
+        serviceWorker: true,
+        updatePopup: true
+      }
+    ]
   ],
   evergreen: true,
   smoothScroll: true

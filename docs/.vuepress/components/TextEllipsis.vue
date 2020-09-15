@@ -3,7 +3,7 @@
  * @Date: 2020-08-18 16:46:52
  * @Description:
  * @LastEditors: HenryTSZ
- * @LastEditTime: 2020-08-19 10:03:20
+ * @LastEditTime: 2020-09-15 14:09:58
 -->
 <template>
   <el-tooltip class="text-ellipsis" v-bind="$attrs" :disabled="disabled" :content="content">
@@ -37,6 +37,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+:focus {
+  outline: none;
+}
 .text-ellipsis {
   width: 100%;
   overflow: hidden;
