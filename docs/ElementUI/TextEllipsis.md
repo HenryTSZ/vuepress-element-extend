@@ -39,7 +39,7 @@
   }
 </script>
 
-<style>
+<style scope>
   .text-ellipsis {
     margin-bottom: 20px;
   }
@@ -85,7 +85,7 @@
   }
 </script>
 
-<style>
+<style scope>
   .text-ellipsis {
     margin-bottom: 20px;
   }

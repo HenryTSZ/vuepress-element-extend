@@ -63,7 +63,6 @@ export default {
   },
   computed: {
     compoLang() {
-      console.log('compoLang -> this.options', this.options)
       return this.options.locales || defaultLang
     },
     langConfig() {
