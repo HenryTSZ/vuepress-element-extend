@@ -3,7 +3,7 @@
  * @Date: 2020-04-20 18:06:29
  * @Description: 公共方法
  * @LastEditors: HenryTSZ
- * @LastEditTime: 2020-08-25 14:09:39
+ * @LastEditTime: 2020-09-17 15:13:18
  */
 
 /**
@@ -414,7 +414,26 @@ export const handlePlaceholder = type => {
   if (['text', 'textarea', 'integer', 'decimal', 'input'].includes(type)) {
     return '请输入'
   } else if (
-    ['select', 'radio', 'checkbox', 'date', 'cascader', 'switch', 'time', 'choose'].includes(type)
+    [
+      'select',
+      'radio',
+      'checkbox',
+      'cascader',
+      'switch',
+      'time',
+      'year',
+      'month',
+      'date',
+      'dates',
+      'week',
+      'datetime',
+      'datetimerange',
+      'daterange',
+      'monthrange',
+      'rate',
+      'color',
+      'choose'
+    ].includes(type)
   ) {
     return '请选择'
   } else {

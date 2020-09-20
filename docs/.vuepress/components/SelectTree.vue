@@ -3,7 +3,9 @@
     <el-select
       ref="select"
       v-model="selectData"
-      v-bind="{ ...$attrs, ...selectProps }"
+      v-bind="{ ...$attrs, multiple, filterable, ...selectProps }"
+      :filter-method="() => true"
+      @input.native="handleInput"
       @visible-change="handleVisibleChange"
       @remove-tag="handleRemoveTag"
       @clear="handleClear"
@@ -26,14 +28,20 @@
 </template>
 
 <script>
+import Tree from './Tree'
 export default {
   name: 'SelectTree',
+  components: { Tree },
   props: {
     value: {
       type: [String, Number, Array],
       required: true
     },
     multiple: {
+      type: Boolean,
+      default: false
+    },
+    filterable: {
       type: Boolean,
       default: false
     },
@@ -112,6 +120,10 @@ export default {
     },
     // select 下拉框出现/隐藏
     handleVisibleChange(val) {
+      // 如果有过滤, 下拉框出现后, 重置搜索
+      if (val && this.filterable) {
+        this.filter()
+      }
       // 下拉框隐藏并且值改变后
       if (!val && this.value + '' !== this.selectData + '') {
         this.$emit('input', this.selectData)
@@ -121,7 +133,7 @@ export default {
     },
     // select 清空
     handleClear() {
-      if (this.$refs.tree.showCheckbox) {
+      if (this.isMultiple) {
         this.selectData = []
         this.$refs.tree.setCheckedKeys([])
       } else {
@@ -209,6 +221,13 @@ export default {
         out.push(first)
       }
       return out
+    },
+    // 过滤
+    handleInput(e) {
+      this.filter(e.target.value)
+    },
+    filter(value) {
+      this.$refs.tree.filter(value)
     }
   },
   mounted() {

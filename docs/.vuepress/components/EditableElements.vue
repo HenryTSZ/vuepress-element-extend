@@ -3,7 +3,7 @@
  * @Date: 2020-05-07 13:30:49
  * @Description:
  * @LastEditors: HenryTSZ
- * @LastEditTime: 2020-08-29 15:36:53
+ * @LastEditTime: 2020-09-17 15:05:37
 -->
 <template>
   <component
@@ -17,7 +17,7 @@
   >
     <text-ellipsis v-if="item.type === 'info'" :content="model[item.prop]"></text-ellipsis>
     <el-option
-      v-for="option in item.select"
+      v-for="option in item.options || item.select"
       :key="option[listProps.value]"
       :value="option[listProps.value]"
       :label="option[listProps.label]"
@@ -27,7 +27,7 @@
     <template v-if="list.includes(item.type)">
       <component
         :is="`el-${item.type}`"
-        v-for="ele in item[item.type]"
+        v-for="ele in item.option || item[item.type]"
         :key="ele[listProps.value]"
         :label="ele[listProps.value]"
         :disabled="ele.disabled"
@@ -66,14 +66,9 @@ export default {
   },
   computed: {
     listProps() {
-      const props = this.item[`${this.item.type}Props`]
+      const props = this.item.props || this.item[`${this.item.type}Props`]
       if (!props) return { label: 'label', value: 'value' }
       const { label = 'label', value = 'value', ...rest } = props
-      console.log({
-        label,
-        value,
-        ...rest
-      })
       return {
         label,
         value,

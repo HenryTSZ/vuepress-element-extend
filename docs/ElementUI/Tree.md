@@ -326,7 +326,7 @@
 :::demo 通过 `disabled` 设置禁用状态
 
 ```html
-<el-row :gutter="20">
+<el-row :gutter="20" class="demo-row">
   <el-col :span="12">
     <p class="label">通过 data 中 disabled 设置禁用</p>
     <tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></tree>
@@ -419,14 +419,6 @@
     }
   }
 </script>
-<style>
-  .el-col:first-child {
-    border-right: 1px solid #eff2f6;
-  }
-  .label {
-    text-align: center;
-  }
-</style>
 ```
 
 :::
