@@ -7,6 +7,7 @@
 3. 单选禁用功能
 4. 文本溢出省略号, 悬浮显示全部
 5. 过滤保留子节点
+6. 单选只能选择叶子节点
 
 封装思路: [基于 ElementUI 封装的 Tree | Henry](https://tsz.now.sh/2020/01/02/based-on-element-ui-encapsulation-tree/), [基于 ElementUI 封装的 Tree2 | Henry](https://tsz.now.sh/2020/01/31/based-on-element-ui-encapsulation-tree-2/)
 
@@ -563,6 +564,99 @@
 
 :::
 
+## 单选只能选择叶子节点
+
+:::demo 传入 `current-is-leaf` 即可; 传入 `is-leaf-method` 可自定义叶子节点, 优先级高于 `current-is-leaf`
+
+```html
+<el-row :gutter="20" class="demo-row">
+  <el-col :span="12">
+    <p class="label">current-is-leaf</p>
+    <tree :data="data" :props="defaultProps" current-is-leaf @node-click="handleNodeClick"></tree>
+  </el-col>
+  <el-col :span="12">
+    <p class="label">is-leaf-method</p>
+    <tree
+      :data="data"
+      :props="defaultProps"
+      :is-leaf-method="isLeafMethod"
+      @node-click="handleNodeClick"
+    ></tree>
+  </el-col>
+</el-row>
+
+<script>
+  export default {
+    data() {
+      return {
+        data: [
+          {
+            id: 1,
+            label: '一级 1',
+            pid: 0,
+            children: [
+              {
+                id: 4,
+                label: '二级 1-1',
+                pid: 1,
+                children: [
+                  {
+                    id: 9,
+                    label: '三级 1-1-1',
+                    pid: 4
+                  },
+                  {
+                    id: 10,
+                    label: '三级 1-1-2',
+                    pid: 4
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: 2,
+            label: '一级 2',
+            pid: 0,
+            children: [
+              {
+                id: 5,
+                label: '二级 2-1',
+                pid: 2
+              },
+              {
+                id: 6,
+                label: '二级 2-2',
+                pid: 2
+              }
+            ]
+          },
+          {
+            id: 3,
+            label: '一级 3',
+            pid: 0
+          }
+        ],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
+      }
+    },
+    methods: {
+      isLeafMethod(data, node) {
+        return node.isLeaf && data.pid
+      },
+      handleNodeClick(data) {
+        console.log('handleNodeClick -> data', data)
+      }
+    }
+  }
+</script>
+```
+
+:::
+
 ## Attributes
 
 | 参数                  | 说明                                                                                                                                       | 类型                                   | 可选值                                                       | 默认值                   |
@@ -571,6 +665,8 @@
 | level                 | 展开层级                                                                                                                                   | number                                 | 0: 展开全部, 1: 展开到一级, ...                              | 1                        |
 | text-ellipsis-props   | 文本溢出省略号                                                                                                                             | object                                 | 参见 [TextEllipsis](/ElementUI/TextEllipsis.html#attributes) | —                        |
 | filter-node-method    | 对树节点进行筛选时执行的方法，返回 true 表示这个节点可以显示，返回 false 则表示这个节点会被隐藏                                            | Function(value, data, node)            | —                                                            | 默认返回过滤节点的子节点 |
+| current-is-leaf       | 单选只能选择叶子节点                                                                                                                       | boolean                                | —                                                            | false                    |
+| is-leaf-method        | 单选自定义只能选择的叶子节点, 优先级高于 current-is-leaf, 返回 boolean                                                                     | function(data, node)                   | —                                                            |
 | data                  | 展示数据                                                                                                                                   | array                                  | —                                                            | —                        |
 | empty-text            | 内容为空的时候展示的文本                                                                                                                   | String                                 | —                                                            | —                        |
 | node-key              | 每个树节点用来作为唯一标识的属性，整棵树应该是唯一的                                                                                       | String                                 | —                                                            | —                        |

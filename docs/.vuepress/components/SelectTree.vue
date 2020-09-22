@@ -57,20 +57,6 @@ export default {
         return {}
       },
       required: true
-    },
-    // 单选时是否只能选择叶子节点
-    currentIsLeaf: {
-      type: Boolean,
-      default: false
-    },
-    /**
-     * @description: 自定义单选时只能选择子节点方法; 优先级高于 currentIsLeaf
-     * @param {data: Object}: 当前节点数据
-     * @param {node: Object}: 当前节点 Node 对象
-     * @return: Boolean
-     */
-    isLeafFun: {
-      type: Function
     }
   },
   data() {
@@ -85,7 +71,7 @@ export default {
       return {
         showCheckbox: this.isMultiple,
         highlightCurrent: !this.isMultiple,
-        expandOnClickNode: this.expandOnClickNode,
+        expandOnClickNode: this.isMultiple || this.treeProps.currentIsLeaf,
         nodeKey: 'id',
         ...this.treeProps,
         defaultCheckedKeys: this.isMultiple ? this.value : [],
@@ -94,9 +80,6 @@ export default {
     },
     isMultiple() {
       return this.selectProps.multiple || this.multiple
-    },
-    expandOnClickNode() {
-      return this.isMultiple ? true : this.currentIsLeaf
     }
   },
   watch: {
@@ -173,12 +156,6 @@ export default {
         return
       }
       const node = this.$refs.tree.getNode(currentNode)
-      // 判断叶子节点
-      if (this.isLeafFun ? this.isLeafFun(currentNode, node) : !node.isLeaf && this.currentIsLeaf) {
-        // 如果不是叶子节点, 设置当前选中节点仍为上一个叶子节点
-        this.$refs.tree.setCurrentKey(this.selectData || null)
-        return
-      }
       this.selectData = ''
       const value = node.key
       const label = node.label

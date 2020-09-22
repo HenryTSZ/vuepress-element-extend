@@ -3,7 +3,7 @@
  * @Date: 2020-01-31 11:15:30
  * @Description: https://vue-element-extend.now.sh/#/element-ui/TreeDemo
  * @LastEditors: HenryTSZ
- * @LastEditTime: 2020-09-15 10:32:07
+ * @LastEditTime: 2020-09-22 10:30:07
  -->
 <template>
   <div class="b-tree">
@@ -97,6 +97,20 @@ export default {
       default() {
         return {}
       }
+    },
+    // 单选时是否只能选择叶子节点
+    currentIsLeaf: {
+      type: Boolean,
+      default: false
+    },
+    /**
+     * @description: 自定义单选时只能选择子节点方法; 优先级高于 currentIsLeaf
+     * @param {data: Object}: 当前节点数据
+     * @param {node: Object}: 当前节点 Node 对象
+     * @return: Boolean
+     */
+    isLeafMethod: {
+      type: Function
     }
   },
   data() {
@@ -237,11 +251,10 @@ export default {
         allNodes.some(({ indeterminate }) => indeterminate) ||
         (allNodes.some(({ checked }) => checked) && !this.checkAll)
     },
-    // 处理单选的 disabled
+    // 处理单选的 disabled 和 isLeaf
     handleCurrentChange(data, node) {
       const { key, disabled } = node
-      if (disabled) {
-        this.$refs[this.ref].setCurrentKey(this.currentKey)
+      if (this.handleDisabled(disabled, data, node)) {
         return
       }
       this.currentKey = key
@@ -249,8 +262,19 @@ export default {
     },
     handleNodeClick(data, node, self) {
       const { disabled } = node
-      if (disabled) return
+      if (this.handleDisabled(disabled, data, node)) {
+        return
+      }
       this.$emit('node-click', data, node, self)
+    },
+    handleDisabled(disabled, data, node) {
+      if (
+        disabled ||
+        (this.isLeafMethod ? !this.isLeafMethod(data, node) : this.currentIsLeaf && !node.isLeaf)
+      ) {
+        this.$refs[this.ref].setCurrentKey(this.currentKey)
+        return true
+      }
     },
     // 过滤
     filter(value) {
