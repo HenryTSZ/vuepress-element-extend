@@ -209,6 +209,12 @@ export default {
   },
   mounted() {
     this.init()
+    // 绑定 el-select 方法
+    for (let key in this.$refs.select) {
+      if (!(key in this) && typeof this.$refs.select[key] === 'function') {
+        this[key] = this.$refs.select[key].bind(this.$refs.select)
+      }
+    }
   }
 }
 </script>

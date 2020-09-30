@@ -1,12 +1,12 @@
 <!--
  * @Author: HenryTSZ
- * @Date: 2020-04-07 09:50:24
- * @Description:
+ * @Date: 2020-04-11 15:27:42
+ * @Description: https://vue-element-extend.now.sh/#/element-ui/BaseTableDemo
  * @LastEditors: HenryTSZ
- * @LastEditTime: 2020-08-20 15:07:32
+ * @LastEditTime: 2020-09-30 18:05:54
  -->
 <template>
-  <el-table ref="elTable" class="base-table" v-bind="$attrs" v-on="$listeners">
+  <el-table ref="elTable" class="base-table" :data="data" v-bind="$attrs" v-on="$listeners">
     <slot name="prev"></slot>
     <template v-for="(column, index) in cols">
       <el-table-column
@@ -38,6 +38,12 @@
 export default {
   name: 'BaseTable',
   props: {
+    data: {
+      type: Array,
+      default() {
+        return []
+      }
+    },
     keyProps: {
       type: Object,
       default() {
@@ -49,6 +55,20 @@ export default {
       default() {
         return []
       }
+    },
+    rowKey: {
+      type: [String, Function],
+      default: 'id'
+    },
+    defaultCheckedKeys: {
+      type: Array,
+      default() {
+        return []
+      }
+    },
+    currentNodeKey: {
+      type: [String, Number],
+      default: ''
     },
     focusRow: {
       type: Number,
@@ -70,15 +90,51 @@ export default {
         : this.columns
     }
   },
+  watch: {
+    data: {
+      handler() {
+        this.setDefaultCheckedKeys()
+        this.setCurrentNodeKey()
+      },
+      immediate: true
+    },
+    defaultCheckedKeys: {
+      handler: 'setDefaultCheckedKeys',
+      immediate: true
+    },
+    currentNodeKey: {
+      handler: 'setCurrentNodeKey',
+      immediate: true
+    }
+  },
   methods: {
     change(row, e, column) {
       this.$emit('row-change', row, e, column.prop)
     },
-    blur(row, e, column) {
-      this.$emit('row-blur', row, e, column.prop)
+    // 设置默认选中
+    setDefaultCheckedKeys() {
+      this.$nextTick(() => {
+        if (this.defaultCheckedKeys.length) {
+          const rows = this.data.filter(item => this.defaultCheckedKeys.includes(item[this.rowKey]))
+          rows.forEach(row => {
+            this.$refs.elTable.toggleRowSelection(row, true)
+          })
+        } else {
+          this.$refs.elTable.clearSelection()
+        }
+      })
     },
-    visibleChange(row, e, column) {
-      this.$emit('row-visible-change', row, e, column)
+    setCurrentNodeKey() {
+      this.$nextTick(() => {
+        if (this.currentNodeKey) {
+          const row = this.data.find(item => this.currentNodeKey === item[this.rowKey])
+          if (row) {
+            this.$refs.elTable.setCurrentRow(row)
+          }
+        } else {
+          this.$refs.elTable.setCurrentRow(null)
+        }
+      })
     }
   },
   mounted() {

@@ -324,17 +324,22 @@
 
 单选时可将 `Tree` 的某些节点设置为禁用状态
 
-:::demo 通过 `disabled` 设置禁用状态
+:::demo 通过 `disabled` 设置禁用状态. 由于未传 `node-key`, 故点击 `disabled` 的节点会将已选中的节点取消
 
 ```html
 <el-row :gutter="20" class="demo-row">
   <el-col :span="12">
     <p class="label">通过 data 中 disabled 设置禁用</p>
-    <tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></tree>
+    <tree :data="data" :props="defaultProps" highlight-current @node-click="handleNodeClick"></tree>
   </el-col>
   <el-col :span="12">
     <p class="label">通过 props 中 disabled 设置禁用</p>
-    <tree :data="data" :props="disabledProps" @node-click="handleNodeClick"></tree>
+    <tree
+      :data="data"
+      :props="disabledProps"
+      highlight-current
+      @node-click="handleNodeClick"
+    ></tree>
   </el-col>
 </el-row>
 
@@ -572,13 +577,20 @@
 <el-row :gutter="20" class="demo-row">
   <el-col :span="12">
     <p class="label">current-is-leaf</p>
-    <tree :data="data" :props="defaultProps" current-is-leaf @node-click="handleNodeClick"></tree>
+    <tree
+      :data="data"
+      :props="defaultProps"
+      highlight-current
+      current-is-leaf
+      @node-click="handleNodeClick"
+    ></tree>
   </el-col>
   <el-col :span="12">
     <p class="label">is-leaf-method</p>
     <tree
       :data="data"
       :props="defaultProps"
+      highlight-current
       :is-leaf-method="isLeafMethod"
       @node-click="handleNodeClick"
     ></tree>
