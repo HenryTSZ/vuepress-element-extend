@@ -4,6 +4,18 @@
 
 具体封装过程请看: [基于 VuePress 搭建一个类似 ElementUI 的说明文档 | Henry](https://tsz.now.sh/2020/08/29/based-VuePress-building-a-similar-ElementUi-document/)
 
+## 更新
+
+### 支持代码文件导入: `<<< @/filepath`
+
+感谢 [winyh](https://github.com/winyh) 大佬提供的方法
+
+具体问题: [请问下支持代码段导入吗？ · Issue #14 · calebman/vuepress-plugin-demo-container](https://github.com/calebman/vuepress-plugin-demo-container/issues/14)
+
+解决方案: [支持 vuepress 代码块导入 by winyh · Pull Request #15 · calebman/vuepress-plugin-demo-container](https://github.com/calebman/vuepress-plugin-demo-container/pull/15)
+
+## 官方介绍
+
 以下为 `vuepress-plugin-demo-container` 官方介绍:
 
 `Demo Container` 是一个基于 `Vuepress` 的插件，它可以帮助你在编写文档的时候增加 `Vue` 示例，它的诞生初衷是为了降低编写组件文档时增加一些相关示例的难度。
