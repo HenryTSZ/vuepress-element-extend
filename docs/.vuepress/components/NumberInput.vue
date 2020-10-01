@@ -3,7 +3,7 @@
  * @Date: 2019-12-26 09:44:27
  * @Description:
  * @LastEditors: HenryTSZ
- * @LastEditTime: 2020-06-10 13:55:55
+ * @LastEditTime: 2020-10-01 21:29:54
  -->
 <template>
   <el-input v-model="model" v-bind="$attrs" @input="_input" v-on="listeners">
@@ -21,12 +21,12 @@ export default {
       default: ''
     },
     type: {
-      // integer 整数, decimal 小数
+      // integer: 整数, decimal: 小数
       type: String,
       default: 'decimal'
     },
     signed: {
-      // plus 正数, minus: 负数, all: 全部
+      // plus: 正数, minus: 负数, all: 全部
       type: String,
       default: 'plus'
     },

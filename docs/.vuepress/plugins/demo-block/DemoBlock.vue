@@ -69,7 +69,12 @@ export default {
       return this.compoLang.find(config => config.lang === this.$lang)['demo-block']
     },
     blockClass() {
-      return `demo-${this.$lang} demo-${this.$router.currentRoute.path.split('/').pop()}`
+      return `demo-${this.$lang} demo-${
+        this.$router.currentRoute.path
+          .split('/')
+          .pop()
+          .split('.')[0]
+      }`
     },
     iconClass() {
       return this.isExpanded ? 'el-icon-caret-top' : 'el-icon-caret-bottom'

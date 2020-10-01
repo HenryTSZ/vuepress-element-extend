@@ -42,7 +42,15 @@ module.exports = {
         {
           title: 'ElementUI',
           collapsable: false,
-          children: ['', 'TextEllipsis', 'Tree', 'SelectTree', 'BaseForm']
+          children: [
+            '',
+            'TextEllipsis',
+            'Tree',
+            'SelectTree',
+            'NumberInput',
+            'RegInput',
+            'BaseForm'
+          ]
         }
       ]
     },
