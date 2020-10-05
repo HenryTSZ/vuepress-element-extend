@@ -54,6 +54,10 @@ module.exports = {
         }
       ]
     },
+    algolia: {
+      apiKey: '8bc4b1fa561fe417741993a1701ded53',
+      indexName: 'now'
+    },
     sidebarDepth: 2,
     repo: 'HenryTSZ/vuepress-element-extend',
     repoLabel: 'GitHub',
