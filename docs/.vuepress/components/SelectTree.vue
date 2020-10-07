@@ -63,7 +63,8 @@ export default {
     return {
       treeKey: Math.random(),
       selectData: '',
-      selectOptions: []
+      selectOptions: [],
+      selectNode: null
     }
   },
   computed: {
@@ -110,7 +111,7 @@ export default {
       // 下拉框隐藏并且值改变后
       if (!val && this.value + '' !== this.selectData + '') {
         this.$emit('input', this.selectData)
-        this.$emit('change', this.selectData)
+        this.$emit('change', this.selectData, this.selectNode)
       }
       this.$emit('visible-change', val)
     },
@@ -118,13 +119,15 @@ export default {
     handleClear() {
       if (this.isMultiple) {
         this.selectData = []
+        this.selectNode = []
         this.$refs.tree.setCheckedKeys([])
       } else {
         this.selectData = ''
+        this.selectNode = null
         this.$refs.tree.setCurrentKey(null)
       }
       this.$emit('input', this.selectData)
-      this.$emit('change', this.selectData)
+      this.$emit('change', this.selectData, this.selectNode)
       this.$emit('clear')
     },
     // select 移除 tag
@@ -137,10 +140,10 @@ export default {
             this.$refs.tree.setChecked(item, false)
           }
         })
-        this.handleCheckChange()
       }
+      this.handleCheckChange()
       this.$emit('input', this.selectData)
-      this.$emit('change', this.selectData)
+      this.$emit('change', this.selectData, this.selectNode)
       this.$emit('remove-tag', val)
     },
     // 单选, 节点被点击时的回调, 返回被点击的节点数据
@@ -153,10 +156,12 @@ export default {
       // 当前传入的值在 tree 中无法找到, 需要清空 select 值
       if (!currentNode) {
         this.selectData = ''
+        this.selectNode = null
         return
       }
       const node = this.$refs.tree.getNode(currentNode)
       this.selectData = ''
+      this.selectNode = null
       const value = node.key
       const label = node.label
       this.selectOptions = [
@@ -166,12 +171,14 @@ export default {
         }
       ]
       this.selectData = value
+      this.selectNode = node.data
       this.$refs.select.blur()
     },
     // 多选, 节点勾选状态发生变化时的回调
     handleCheckChange() {
       this.selectOptions = [{}]
       this.selectData = []
+      this.selectNode = []
       const checkedKeys = this.$refs.tree.getCheckedKeys(
         this.treeProps.leafOnly,
         this.treeProps.includeHalfChecked
@@ -184,6 +191,7 @@ export default {
           label: checkedNode.label
         })
         this.selectData.push(value)
+        this.selectNode.push(checkedNode.data)
       })
     },
     tree2List(tree) {
