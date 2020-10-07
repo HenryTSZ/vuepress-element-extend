@@ -28,6 +28,8 @@
 
 ## 分类
 
+展示全部分类
+
 :::demo 通过 `type` , `signed` 和 `places` 来设置数字类型和小数位数
 
 ```html
@@ -86,6 +88,11 @@
     }
   }
 </script>
+<style>
+.el-input {
+  margin: 0 10px;
+}
+</style>
 ```
 
 :::

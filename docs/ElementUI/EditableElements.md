@@ -4,7 +4,7 @@
 
 支持 单行文本、文本域、`Switch` 开关、选择器等 `ElementUI` `form` 大部分组件和本项目自定义组件: `SelectTree`、`NumberInput`、`RegInput` 等;
 
-封装思路: [基于 ElementUI 封装的基础 table 和 form | Henry](https://tsz.now.sh/2020/05/16/based-on-element-ui-encapsulation-table-form/#%E5%B0%81%E8%A3%85%E5%8F%AF%E7%BC%96%E8%BE%91%E7%BB%84%E4%BB%B6)
+封装思路: [基于 ElementUI 封装的基础 table 和 form | Henry](https://tsz.now.sh/2020/05/16/based-on-element-ui-encapsulation-table-form/)
 
 ## 简单组件 - Input 等
 
@@ -148,8 +148,8 @@
 
 | 参数      | 说明                                                                                                                                               | 类型    | 可选值 | 默认值                               |
 | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | ------ | ------------------------------------ |
-| label     | 组件关联的 `label` 文字                                                                                                                            | string  | —      | —                                    |
-| prop      | `v-model` 绑定值                                                                                                                                   | string  | —      | —                                    |
+| label     | 标签文本                                                                                                                                           | string  | —      | —                                    |
+| prop      | 表单域 model 字段                                                                                                                                  | string  | —      | —                                    |
 | type      | 组件类型, 参见各组件该属性, 如无该属性, 即为该组件名去掉 `el-`, 如 `el-select` 为 `select`;`type` 为 `info` 时, 只做展示使用, 只支持文字           | string  | —      | —                                    |
 | options   | 可选择组件的选择数据                                                                                                                               | array   | —      | `[{ label: '', value: '' }]`         |
 | props     | 配置 `options` 的 `label` 及 `value`                                                                                                               | object  | —      | `{ label: 'label', value: 'value' }` |
