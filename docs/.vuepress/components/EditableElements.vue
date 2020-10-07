@@ -3,7 +3,7 @@
  * @Date: 2020-05-07 13:30:49
  * @Description:
  * @LastEditors: HenryTSZ
- * @LastEditTime: 2020-09-17 15:05:37
+ * @LastEditTime: 2020-10-07 20:55:46
 -->
 <template>
   <component
@@ -16,18 +16,20 @@
     v-on="{ ...$listeners, ...item.events }"
   >
     <text-ellipsis v-if="item.type === 'info'" :content="model[item.prop]"></text-ellipsis>
-    <el-option
-      v-for="option in item.options || item.select"
-      :key="option[listProps.value]"
-      :value="option[listProps.value]"
-      :label="option[listProps.label]"
-      :disabled="option.disabled"
-    ></el-option>
+    <template v-if="item.type === 'select'">
+      <el-option
+        v-for="option in item.options || item.select"
+        :key="option[listProps.value]"
+        :value="option[listProps.value]"
+        :label="option[listProps.label]"
+        :disabled="option.disabled"
+      ></el-option>
+    </template>
     <!-- radio / checkbox 等 -->
     <template v-if="list.includes(item.type)">
       <component
         :is="`el-${item.type}`"
-        v-for="ele in item.option || item[item.type]"
+        v-for="ele in item.options || item[item.type]"
         :key="ele[listProps.value]"
         :label="ele[listProps.value]"
         :disabled="ele.disabled"

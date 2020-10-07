@@ -50,6 +50,7 @@ module.exports = {
             'NumberInput',
             'RegInput',
             'UploadFile',
+            'EditableElements',
             'BaseForm'
           ]
         }
