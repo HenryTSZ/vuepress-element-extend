@@ -3,20 +3,20 @@
  * @Date: 2020-04-11 15:27:42
  * @Description: https://vue-element-extend.now.sh/#/element-ui/BaseTableDemo
  * @LastEditors: HenryTSZ
- * @LastEditTime: 2020-09-30 18:05:54
+ * @LastEditTime: 2020-10-08 12:51:29
  -->
 <template>
   <el-table ref="elTable" class="base-table" :data="data" v-bind="$attrs" v-on="$listeners">
     <slot name="prev"></slot>
     <template v-for="(column, index) in cols">
       <el-table-column
-        v-if="column.editable || column.editableFun"
+        v-if="column.editable || column.editableMethod"
         :key="`${column.prop}-edit`"
         v-bind="column"
       >
         <template slot-scope="{ row, $index }">
           <editable-elements
-            v-if="!column.editableFun || column.editableFun(row, column, row[column.prop], $index)"
+            v-if="!column.editableMethod || column.editableMethod(row, column, row[column.prop], $index)"
             :model="row"
             :item="{ ...column, focus: index === focusCol && $index === focusRow }"
             @change="change(row, $event, column)"
@@ -44,7 +44,7 @@ export default {
         return []
       }
     },
-    keyProps: {
+    props: {
       type: Object,
       default() {
         return null
@@ -81,11 +81,11 @@ export default {
   },
   computed: {
     cols() {
-      return this.keyProps
+      return this.props
         ? this.columns.map(column => ({
             ...column,
-            prop: column[this.keyProps.prop || 'prop'],
-            label: column[this.keyProps.label || 'label']
+            prop: column[this.props.prop || 'prop'],
+            label: column[this.props.label || 'label']
           }))
         : this.columns
     }

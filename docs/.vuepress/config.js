@@ -51,7 +51,8 @@ module.exports = {
             'RegInput',
             'UploadFile',
             'EditableElements',
-            'BaseForm'
+            'BaseForm',
+            'BaseTable'
           ]
         }
       ]

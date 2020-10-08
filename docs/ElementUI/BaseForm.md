@@ -1,4 +1,4 @@
-# BaseForm
+# BaseForm 基础表单
 
 简化 `el-form` 重复代码, 最少仅需要一行代码即可
 
@@ -97,7 +97,7 @@
 
 包含 `ElementUI` 组件和自定义组件
 
-::: demo `<base-form>` 增加一个 `Attributes`: `form-items`, 里面参数参见 [EditableElements - item](/ElementUI/EditableElements.html#item)
+::: demo `<base-form>` 增加一个 `Attributes`: `form-items`, 里面参数参见 [form-items](/ElementUI/BaseForm.html#form-items-%E6%AF%8F%E9%A1%B9)
 
 ```HTML
 <base-form :model="model" :ref="ref" :form-items="formItems" label-width="auto">
@@ -115,7 +115,6 @@ const options = [
   { label: '选项四', value: 'select4' }
 ]
 export default {
-  name: 'DemoBaseForm',
   data() {
     return {
       model: {
@@ -200,22 +199,23 @@ export default {
 
 ## Attributes
 
-| 参数                    | 说明                                                                                      | 类型    | 可选值                | 默认值 |
-| ----------------------- | ----------------------------------------------------------------------------------------- | ------- | --------------------- | ------ |
-| model                   | 表单数据对象                                                                              | object  | —                     | —      |
-| form-items              | Form-Item Attributes 集合, 具体看下表                                                     | array   | —                     | —      |
-| rules                   | 表单验证规则                                                                              | object  | —                     | —      |
-| inline                  | 行内表单模式                                                                              | boolean | —                     | false  |
-| label-position          | 表单域标签的位置，如果值为 left 或者 right 时，则需要设置 `label-width`                   | string  | right/left/top        | right  |
-| label-width             | 表单域标签的宽度，例如 '50px'。作为 Form 直接子元素的 form-item 会继承该值。支持 `auto`。 | string  | —                     | —      |
-| label-suffix            | 表单域标签的后缀                                                                          | string  | —                     | —      |
-| hide-required-asterisk  | 是否显示必填字段的标签旁边的红色星号                                                      | boolean | —                     | false  |
-| show-message            | 是否显示校验错误信息                                                                      | boolean | —                     | true   |
-| inline-message          | 是否以行内形式展示校验信息                                                                | boolean | —                     | false  |
-| status-icon             | 是否在输入框中显示校验结果反馈图标                                                        | boolean | —                     | false  |
-| validate-on-rule-change | 是否在 `rules` 属性改变后立即触发一次验证                                                 | boolean | —                     | true   |
-| size                    | 用于控制该表单内组件的尺寸                                                                | string  | medium / small / mini | —      |
-| disabled                | 是否禁用该表单内的所有组件。若设置为 true，则表单内组件上的 disabled 属性不再生效         | boolean | —                     | false  |
+| 参数                    | 说明                                                                                      | 类型    | 可选值                | 默认值                             |
+| ----------------------- | ----------------------------------------------------------------------------------------- | ------- | --------------------- | ---------------------------------- |
+| model                   | 表单数据对象                                                                              | object  | —                     | —                                  |
+| form-items              | Form-Item Attributes 集合, 具体看下表                                                     | array   | —                     | —                                  |
+| props                   | 统一配置 `form-items` 的 `prop` 及 `label`                                                | object  | —                     | `{ prop: 'prop', label: 'label' }` |
+| rules                   | 表单验证规则                                                                              | object  | —                     | —                                  |
+| inline                  | 行内表单模式                                                                              | boolean | —                     | false                              |
+| label-position          | 表单域标签的位置，如果值为 left 或者 right 时，则需要设置 `label-width`                   | string  | right/left/top        | right                              |
+| label-width             | 表单域标签的宽度，例如 '50px'。作为 Form 直接子元素的 form-item 会继承该值。支持 `auto`。 | string  | —                     | —                                  |
+| label-suffix            | 表单域标签的后缀                                                                          | string  | —                     | —                                  |
+| hide-required-asterisk  | 是否显示必填字段的标签旁边的红色星号                                                      | boolean | —                     | false                              |
+| show-message            | 是否显示校验错误信息                                                                      | boolean | —                     | true                               |
+| inline-message          | 是否以行内形式展示校验信息                                                                | boolean | —                     | false                              |
+| status-icon             | 是否在输入框中显示校验结果反馈图标                                                        | boolean | —                     | false                              |
+| validate-on-rule-change | 是否在 `rules` 属性改变后立即触发一次验证                                                 | boolean | —                     | true                               |
+| size                    | 用于控制该表单内组件的尺寸                                                                | string  | medium / small / mini | —                                  |
+| disabled                | 是否禁用该表单内的所有组件。若设置为 true，则表单内组件上的 disabled 属性不再生效         | boolean | —                     | false                              |
 
 ### form-items 每项
 

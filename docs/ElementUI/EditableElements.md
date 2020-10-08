@@ -8,7 +8,7 @@
 
 ## 简单组件 - Input 等
 
-:::demo 传入 `model` 及 `item` 即可; `model` 为 `v-model` 的对象, `item` 为组件属性集合
+:::demo 传入 `model` 及 `item` 即可; `model` 为 `v-model` 的对象, `item` 为组件属性集合, 具体参见 [EditableElements - item](/ElementUI/EditableElements.html#item)
 
 ```html
 <p v-for="item in items" :key="item.prop" class="info">
@@ -29,7 +29,7 @@
           info: '就是看看而已'
         },
         items: [
-          { label: '活动名称', prop: 'name', type: 'text', component: 'el-input' },
+          { label: '活动名称', prop: 'name', type: 'text', component: 'el-input', focus: true },
           { label: '活动日期', prop: 'date1', type: 'date', component: 'el-date-picker' },
           { label: '活动时间', prop: 'date2', type: 'time', component: 'el-time-picker' },
           {
@@ -47,19 +47,6 @@
     }
   }
 </script>
-<style>
-  .info {
-    display: flex;
-    align-items: center;
-  }
-  .label {
-    margin-right: 15px;
-  }
-  .el-input,
-  .el-textarea {
-    width: 220px;
-  }
-</style>
 ```
 
 :::
@@ -124,15 +111,6 @@
     }
   }
 </script>
-<style>
-  .info {
-    display: flex;
-    align-items: center;
-  }
-  .label {
-    margin-right: 15px;
-  }
-</style>
 ```
 
 :::

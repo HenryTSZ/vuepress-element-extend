@@ -3,7 +3,7 @@
  * @Date: 2020-04-20 18:06:29
  * @Description: 公共方法
  * @LastEditors: HenryTSZ
- * @LastEditTime: 2020-09-17 15:13:18
+ * @LastEditTime: 2020-10-08 11:39:48
  */
 
 /**
@@ -211,6 +211,24 @@ export const arrRemove = (arr, fun) => {
 }
 
 /**
+ * @description: 将一维数组几个一组拆分为二维数组
+ * @param {Array} arr 原数组
+ * @param {Number} num 几个一组
+ * @return {Array} 拆分后的二维数组
+ */
+export const sliceGroup = (arr, num) => {
+  return arr.reduce((acc, item, index) => {
+    const remainder = index % num
+    if (remainder) {
+      acc[(index - remainder) / num].push(item)
+    } else {
+      acc[index / num] = [item]
+    }
+    return acc
+  }, [])
+}
+
+/**
  * @description 从对象中找到 value
  * @param {Object} data
  * @param {String} key
@@ -357,24 +375,19 @@ export const toFixed = (number, digits, flag = true) => {
   if (typeof digits === 'undefined' || digits === 0) {
     return Math.round(number).toString()
   }
-
   let result = number.toString()
   const arr = result.split('.')
-
   // 整数的情况
   if (arr.length < 2) {
     return `${result}${flag ? `.${new Array(digits).fill(0).join('')}` : ''}`
   }
-
   const [integer, decimal] = arr
   if (decimal.length === digits) {
     return result
   }
-
   if (decimal.length < digits) {
-    return `${result}${flag ? `.${new Array(digits - decimal.length).fill(0).join('')}` : ''}`
+    return `${result}${flag ? new Array(digits - decimal.length).fill(0).join('') : ''}`
   }
-
   result = integer + '.' + decimal.substr(0, digits)
   const last = decimal.substr(digits, 1)
   // 四舍五入，转换为整数再处理，避免浮点数精度的损失
@@ -383,7 +396,6 @@ export const toFixed = (number, digits, flag = true) => {
     result = (Math.round(parseFloat(result) * x) + (integer >= 0 ? 1 : -1)) / x
     result = result.toFixed(digits)
   }
-
   return result
 }
 

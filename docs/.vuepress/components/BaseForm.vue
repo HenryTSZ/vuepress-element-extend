@@ -3,7 +3,7 @@
  * @Date: 2020-03-21 10:13:51
  * @Description:
  * @LastEditors: HenryTSZ
- * @LastEditTime: 2020-05-16 11:53:24
+ * @LastEditTime: 2020-10-08 12:21:08
 -->
 <template>
   <el-form v-bind="$attrs" :model="model" ref="elForm" class="base-form">
@@ -33,7 +33,7 @@ import { handlePlaceholder } from 'utils'
 export default {
   name: 'BaseForm',
   props: {
-    keyProps: {
+    props: {
       type: Object,
       default() {
         return null
@@ -60,11 +60,11 @@ export default {
   },
   computed: {
     items() {
-      return this.keyProps
+      return this.props
         ? this.formItems.map(item => ({
             ...item,
-            prop: item[this.keyProps.prop || 'prop'],
-            label: item[this.keyProps.label || 'label']
+            prop: item[this.props.prop || 'prop'],
+            label: item[this.props.label || 'label']
           }))
         : this.formItems
     }

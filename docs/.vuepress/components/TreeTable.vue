@@ -9,13 +9,13 @@
     <slot name="prev"></slot>
     <template v-for="(column, index) in cols">
       <el-table-column
-        v-if="column.editable || column.editableFun"
+        v-if="column.editable || column.editableMethod"
         :key="`${column.prop}-edit`"
         v-bind="column"
       >
         <template slot-scope="{ row, $index }">
           <editable-elements
-            v-if="!column.editableFun || column.editableFun(row, column, row[column.prop], $index)"
+            v-if="!column.editableMethod || column.editableMethod(row, column, row[column.prop], $index)"
             :model="row"
             :item="{ ...column, focus: index === focusCol && $index === focusRow }"
             @change="change(row, $event, column)"
