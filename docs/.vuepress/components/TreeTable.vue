@@ -37,7 +37,7 @@
 export default {
   name: 'TreeTable',
   props: {
-    keyProps: {
+    props: {
       type: Object,
       default() {
         return null
@@ -91,11 +91,11 @@ export default {
   },
   computed: {
     cols() {
-      return this.keyProps
+      return this.props
         ? this.columns.map(column => ({
             ...column,
-            prop: column[this.keyProps.prop || 'prop'],
-            label: column[this.keyProps.label || 'label']
+            prop: column[this.props.prop || 'prop'],
+            label: column[this.props.label || 'label']
           }))
         : this.columns
     }

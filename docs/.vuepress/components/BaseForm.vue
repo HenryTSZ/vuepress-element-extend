@@ -3,7 +3,7 @@
  * @Date: 2020-03-21 10:13:51
  * @Description:
  * @LastEditors: HenryTSZ
- * @LastEditTime: 2020-10-08 12:21:08
+ * @LastEditTime: 2020-10-12 18:34:40
 -->
 <template>
   <el-form v-bind="$attrs" :model="model" ref="elForm" class="base-form">
@@ -12,14 +12,16 @@
       v-for="item in items"
       :key="item.prop"
       v-bind="item"
-      :rules="[
-        {
-          required: !item.noRequired,
-          message: item.ruleMessage || `${handlePlaceholder(item.type)}${item.label}`,
-          trigger: item.type === 'select' ? 'change' : 'blur'
-        },
-        ...(rules[item.prop] || [])
-      ]"
+      :rules="
+        item.rules ||
+          rules[item.prop] || [
+            {
+              required: !item.noRequired,
+              message: item.ruleMessage || `${handlePlaceholder(item.type)}${item.label}`,
+              trigger: selectMap.includes(item.type) ? 'change' : 'blur'
+            }
+          ]
+      "
     >
       <editable-elements :model="model" :item="item" v-on="$listeners"></editable-elements>
     </el-form-item>
@@ -28,7 +30,7 @@
 </template>
 
 <script>
-import { handlePlaceholder } from 'utils'
+import { selectMap, handlePlaceholder } from 'utils'
 
 export default {
   name: 'BaseForm',
@@ -57,6 +59,9 @@ export default {
         return {}
       }
     }
+  },
+  data() {
+    return { selectMap }
   },
   computed: {
     items() {

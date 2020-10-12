@@ -3,7 +3,7 @@
  * @Date: 2020-04-20 18:06:29
  * @Description: 公共方法
  * @LastEditors: HenryTSZ
- * @LastEditTime: 2020-10-08 11:39:48
+ * @LastEditTime: 2020-10-12 17:08:15
  */
 
 /**
@@ -417,36 +417,38 @@ export const formatMileage = (number, prefix = '') => {
   }
 }
 
+export const inputMap = ['text', 'textarea', 'integer', 'decimal', 'input']
+
+export const selectMap = [
+  'select',
+  'radio',
+  'checkbox',
+  'cascader',
+  'switch',
+  'time',
+  'year',
+  'month',
+  'date',
+  'dates',
+  'week',
+  'datetime',
+  'datetimerange',
+  'daterange',
+  'monthrange',
+  'rate',
+  'color',
+  'choose'
+]
+
 /**
  * @description: 根据类型返回 placeholder
  * @param {String} type
  * @return {String} result
  */
 export const handlePlaceholder = type => {
-  if (['text', 'textarea', 'integer', 'decimal', 'input'].includes(type)) {
+  if (inputMap.includes(type)) {
     return '请输入'
-  } else if (
-    [
-      'select',
-      'radio',
-      'checkbox',
-      'cascader',
-      'switch',
-      'time',
-      'year',
-      'month',
-      'date',
-      'dates',
-      'week',
-      'datetime',
-      'datetimerange',
-      'daterange',
-      'monthrange',
-      'rate',
-      'color',
-      'choose'
-    ].includes(type)
-  ) {
+  } else if (selectMap.includes(type)) {
     return '请选择'
   } else {
     return ''
@@ -471,5 +473,7 @@ export default {
   checkProps,
   toFixed,
   formatMileage,
+  inputMap,
+  selectMap,
   handlePlaceholder
 }

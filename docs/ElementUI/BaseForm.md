@@ -99,7 +99,7 @@
 
 ::: demo `<base-form>` 增加一个 `Attributes`: `form-items`, 里面参数参见 [form-items](/ElementUI/BaseForm.html#form-items-%E6%AF%8F%E9%A1%B9)
 
-```HTML
+```html
 <base-form :model="model" :ref="ref" :form-items="formItems" label-width="auto">
   <el-form-item>
     <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
@@ -108,90 +108,133 @@
 </base-form>
 
 <script>
-const options = [
-  { label: '选项一', value: 'select1' },
-  { label: '选项二', value: 'select2' },
-  { label: '选项三', value: 'select3', disabled: true},
-  { label: '选项四', value: 'select4' }
-]
-export default {
-  data() {
-    return {
-      model: {
-        text: '',
-        textarea: '',
-        integer: '',
-        decimal: '',
-        select: '',
-        info: '只展示, 不可编辑',
-        datePicker: '',
-        switch: '',
-        checkbox: [],
-        radio: ''
-      },
-      ref: 'form',
-      formItems: [
-        { label: '单行文本', prop: 'text', type: 'text', component: 'el-input' },
+  const options = [
+    { label: '选项一', value: 'select1' },
+    { label: '选项二', value: 'select2' },
+    { label: '选项三', value: 'select3', disabled: true },
+    { label: '选项四', value: 'select4' }
+  ]
+  const selectTreeOptions = [
+    {
+      id: 1,
+      label: '一级 1',
+      children: [
         {
-          label: '前置',
-          prop: 'prepend',
-          type: 'text',
-          component: 'el-input',
-          slots: { prepend: 'http://' }
-        },
-        {
-          label: '后置',
-          prop: 'append',
-          type: 'text',
-          component: 'el-input',
-          slots: { append: '.com' }
-        },
-        { label: '文本域', prop: 'textarea', type: 'textarea', component: 'el-input' },
-        { label: '整数', prop: 'integer', type: 'integer', component: 'number-input' },
-        { label: '小数', prop: 'decimal', type: 'decimal', component: 'number-input' },
-        {
-          label: '选择器',
-          prop: 'select',
-          type: 'select',
-          component: 'el-select',
-          options
-        },
-        { label: '不可编辑', prop: 'info', type: 'info', component: 'span', noRequired: true },
-        { label: '日期选择器', prop: 'datePicker', type: 'date', component: 'el-date-picker' },
-        { label: '开关', prop: 'switch', type: 'switch', component: 'el-switch' },
-        {
-          label: '多选框',
-          prop: 'checkbox',
-          type: 'checkbox',
-          component: 'el-checkbox-group',
-          options,
-        },
-        {
-          label: '单选框',
-          prop: 'radio',
-          type: 'radio',
-          component: 'el-radio-group',
-          options
+          id: 4,
+          label: '二级 1-1',
+          children: [
+            { id: 9, label: '三级 1-1-1' },
+            { id: 10, label: '三级 1-1-2' }
+          ]
         }
       ]
-    }
-  },
-  methods: {
-    submitForm() {
-      this.$refs[this.ref].validate(valid => {
-        if (valid) {
-          alert('submit!')
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
     },
-    resetForm() {
-      this.$refs[this.ref].resetFields()
+    {
+      id: 2,
+      label: '一级 2',
+      children: [
+        { id: 5, label: '二级 2-1' },
+        { id: 6, label: '二级 2-2' }
+      ]
+    },
+    {
+      id: 3,
+      label: '一级 3',
+      children: [
+        { id: 7, label: '二级 3-1' },
+        { id: 8, label: '二级 3-2' }
+      ]
+    }
+  ]
+  export default {
+    data() {
+      return {
+        model: {
+          text: '',
+          textarea: '',
+          integer: '',
+          decimal: '',
+          select: '',
+          selectTree: '',
+          info: '只展示, 不可编辑',
+          datePicker: '',
+          switch: '',
+          checkbox: [],
+          radio: ''
+        },
+        ref: 'form',
+        formItems: [
+          { label: '单行文本', prop: 'text', type: 'text', component: 'el-input' },
+          {
+            label: '前置',
+            prop: 'prepend',
+            type: 'text',
+            component: 'el-input',
+            slots: { prepend: 'http://' }
+          },
+          {
+            label: '后置',
+            prop: 'append',
+            type: 'text',
+            component: 'el-input',
+            slots: { append: '.com' }
+          },
+          { label: '文本域', prop: 'textarea', type: 'textarea', component: 'el-input' },
+          { label: '整数', prop: 'integer', type: 'integer', component: 'number-input' },
+          { label: '小数', prop: 'decimal', type: 'decimal', component: 'number-input' },
+          {
+            label: '选择器',
+            prop: 'select',
+            type: 'select',
+            component: 'el-select',
+            options
+          },
+          {
+            label: '树形选择器',
+            prop: 'selectTree',
+            type: 'select',
+            component: 'select-tree',
+            treeProps: {
+              data: selectTreeOptions
+            },
+            rules: [{ required: true, message: '请选择kk树形选择器', trigger: ['blur', 'change'] }]
+          },
+          { label: '不可编辑', prop: 'info', type: 'info', component: 'span', noRequired: true },
+          { label: '日期选择器', prop: 'datePicker', type: 'date', component: 'el-date-picker' },
+          { label: '开关', prop: 'switch', type: 'switch', component: 'el-switch' },
+          {
+            label: '多选框',
+            prop: 'checkbox',
+            type: 'checkbox',
+            component: 'el-checkbox-group',
+            options
+          },
+          {
+            label: '单选框',
+            prop: 'radio',
+            type: 'radio',
+            component: 'el-radio-group',
+            options
+          }
+        ]
+      }
+    },
+    methods: {
+      submitForm() {
+        this.$refs[this.ref].validate(valid => {
+          if (valid) {
+            alert('submit!')
+          } else {
+            console.log('error submit!!')
+            return false
+          }
+        })
+      },
+      resetForm() {
+        this.$refs[this.ref].resetFields()
+      }
     }
   }
-}
 </script>
 ```
 
@@ -222,10 +265,10 @@ export default {
 | 参数                                                             | 说明                                                                         | 类型    | 可选值                            | 默认值 |
 | ---------------------------------------------------------------- | ---------------------------------------------------------------------------- | ------- | --------------------------------- | ------ |
 | [EditableElements - item](/ElementUI/EditableElements.html#item) | 与 EditableElements 一样                                                     | —       | —                                 | —      |
+| noRequired                                                       | 是否必填，如不设置，则会根据校验规则自动生成                                 | boolean | —                                 | false  |
 | prop                                                             | 表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的 | string  | 传入 Form 组件的 `model` 中的字段 | —      |
 | label                                                            | 标签文本                                                                     | string  | —                                 | —      |
 | label-width                                                      | 表单域标签的的宽度，例如 '50px'。支持 `auto`。                               | string  | —                                 | —      |
-| required                                                         | 是否必填，如不设置，则会根据校验规则自动生成                                 | boolean | —                                 | false  |
 | rules                                                            | 表单验证规则                                                                 | object  | —                                 | —      |
 | error                                                            | 表单域验证错误信息, 设置该值会使表单验证状态变为`error`，并显示该错误信息    | string  | —                                 | —      |
 | show-message                                                     | 是否显示校验错误信息                                                         | boolean | —                                 | true   |

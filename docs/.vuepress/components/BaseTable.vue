@@ -3,7 +3,7 @@
  * @Date: 2020-04-11 15:27:42
  * @Description: https://vue-element-extend.now.sh/#/element-ui/BaseTableDemo
  * @LastEditors: HenryTSZ
- * @LastEditTime: 2020-10-08 12:51:29
+ * @LastEditTime: 2020-10-12 16:57:23
  -->
 <template>
   <el-table ref="elTable" class="base-table" :data="data" v-bind="$attrs" v-on="$listeners">
@@ -16,7 +16,9 @@
       >
         <template slot-scope="{ row, $index }">
           <editable-elements
-            v-if="!column.editableMethod || column.editableMethod(row, column, row[column.prop], $index)"
+            v-if="
+              !column.editableMethod || column.editableMethod(row, column, row[column.prop], $index)
+            "
             :model="row"
             :item="{ ...column, focus: index === focusCol && $index === focusRow }"
             @change="change(row, $event, column)"
@@ -119,8 +121,6 @@ export default {
           rows.forEach(row => {
             this.$refs.elTable.toggleRowSelection(row, true)
           })
-        } else {
-          this.$refs.elTable.clearSelection()
         }
       })
     },
@@ -131,8 +131,6 @@ export default {
           if (row) {
             this.$refs.elTable.setCurrentRow(row)
           }
-        } else {
-          this.$refs.elTable.setCurrentRow(null)
         }
       })
     }
