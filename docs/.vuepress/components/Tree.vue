@@ -166,6 +166,7 @@ export default {
     },
     handleData() {
       this.$nextTick(() => {
+        if (!this.$refs[this.ref]) return
         this.allNodes = this.getAllNodes(this.$refs[this.ref].root[childNodes])
         this.allNodes.length &&
           (this.maxLevel = Math.max.apply(

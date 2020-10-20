@@ -1,6 +1,6 @@
 <template>
   <el-table
-    ref="elTable"
+    :ref="ref"
     class="base-table"
     :data="data"
     :row-key="rowKey"
@@ -81,6 +81,11 @@ export default {
       default: 0
     }
   },
+  data() {
+    return {
+      ref: 'elTable'
+    }
+  },
   computed: {
     cols() {
       return this.props
@@ -114,20 +119,22 @@ export default {
     // 设置默认选中
     setDefaultCheckedKeys() {
       this.$nextTick(() => {
+        if (!this.$refs[this.ref]) return
         if (this.defaultCheckedKeys.length) {
           const rows = this.data.filter(item => this.defaultCheckedKeys.includes(item[this.rowKey]))
           rows.forEach(row => {
-            this.$refs.elTable.toggleRowSelection(row, true)
+            this.$refs[this.ref].toggleRowSelection(row, true)
           })
         }
       })
     },
     setCurrentNodeKey() {
       this.$nextTick(() => {
+        if (!this.$refs[this.ref]) return
         if (this.currentNodeKey) {
           const row = this.data.find(item => this.currentNodeKey === item[this.rowKey])
           if (row) {
-            this.$refs.elTable.setCurrentRow(row)
+            this.$refs[this.ref].setCurrentRow(row)
           }
         }
       })
@@ -136,16 +143,17 @@ export default {
     refreshLayout() {
       if (!this.isEditable) return
       this.$nextTick(() => {
+        if (!this.$refs[this.ref]) return
         setTimeout(() => {
-          this.$refs.elTable.doLayout()
+          this.$refs[this.ref].doLayout()
         }, 200)
       })
     }
   },
   mounted() {
-    for (let key in this.$refs.elTable) {
-      if (!(key in this) && typeof this.$refs.elTable[key] === 'function') {
-        this[key] = this.$refs.elTable[key].bind(this.$refs.elTable)
+    for (let key in this.$refs[this.ref]) {
+      if (!(key in this) && typeof this.$refs[this.ref][key] === 'function') {
+        this[key] = this.$refs[this.ref][key].bind(this.$refs[this.ref])
       }
     }
   }

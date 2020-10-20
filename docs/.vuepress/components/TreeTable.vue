@@ -164,6 +164,7 @@ export default {
     },
     handleData() {
       this.$nextTick(() => {
+        if (!this.$refs[this.ref]) return
         this.treeData = this.$refs[this.ref].store.states.treeData
         const levels = Object.values(this.treeData).map(({ level }) => level)
         if (levels.length) {
@@ -179,6 +180,7 @@ export default {
     },
     // 设置默认选中
     async setDefaultCheckedKeys() {
+      if (!this.$refs[this.ref]) return
       if (!this.children) {
         await this.handleData()
       }
@@ -222,6 +224,7 @@ export default {
       }
     },
     async setCurrentNodeKey() {
+      if (!this.$refs[this.ref]) return
       if (!this.children) {
         await this.handleData()
       }
@@ -249,8 +252,9 @@ export default {
     refreshLayout() {
       if (!this.isEditable) return
       this.$nextTick(() => {
+        if (!this.$refs[this.ref]) return
         setTimeout(() => {
-          this.$refs.elTable.doLayout()
+          this.$refs[this.ref].doLayout()
         }, 200)
       })
     },

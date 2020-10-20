@@ -15,7 +15,9 @@ export default {
     },
     reg: {
       type: RegExp,
-      default: /./
+      default() {
+        return /./
+      }
     }
   },
   data() {
