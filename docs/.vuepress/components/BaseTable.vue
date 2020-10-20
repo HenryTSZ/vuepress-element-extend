@@ -1,10 +1,3 @@
-<!--
- * @Author: HenryTSZ
- * @Date: 2020-04-11 15:27:42
- * @Description: https://vue-element-extend.now.sh/#/element-ui/BaseTableDemo
- * @LastEditors: HenryTSZ
- * @LastEditTime: 2020-10-20 12:21:10
- -->
 <template>
   <el-table
     ref="elTable"

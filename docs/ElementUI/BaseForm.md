@@ -6,6 +6,8 @@
 
 封装思路: [基于 ElementUI 封装的基础 table 和 form | Henry](https://tsz.now.sh/2020/05/16/based-on-element-ui-encapsulation-table-form/)
 
+[源码](https://github.com/HenryTSZ/vuepress-element-extend/blob/master/docs/.vuepress/components/BaseForm.vue)
+
 ## 基础用法
 
 包括各种表单项，比如输入框、选择器、开关、单选框、多选框等。

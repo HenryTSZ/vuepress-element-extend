@@ -7,6 +7,8 @@
 
 封装思路: [基于 ElementUI 封装的 TreeTable | Henry](https://tsz.now.sh/2020/04/04/based-on-element-ui-encapsulation-tree-table/)
 
+[源码](https://github.com/HenryTSZ/vuepress-element-extend/blob/master/docs/.vuepress/components/TreeTable.vue)
+
 ## 基础用法
 
 参考 [BaseTable](/ElementUI/BaseTable.html)

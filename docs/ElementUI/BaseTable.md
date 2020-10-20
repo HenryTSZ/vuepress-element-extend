@@ -4,6 +4,8 @@
 
 封装思路: [基于 ElementUI 封装的基础 table 和 form | Henry](https://tsz.now.sh/2020/05/16/based-on-element-ui-encapsulation-table-form/)
 
+[源码](https://github.com/HenryTSZ/vuepress-element-extend/blob/master/docs/.vuepress/components/BaseTable.vue)
+
 ## 基础表格
 
 基础的表格展示用法.

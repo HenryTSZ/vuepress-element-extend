@@ -1,10 +1,3 @@
-<!--
- * @Author: HenryTSZ
- * @Date: 2019-12-26 09:44:27
- * @Description:
- * @LastEditors: HenryTSZ
- * @LastEditTime: 2020-10-01 21:29:54
- -->
 <template>
   <el-input v-model="model" v-bind="$attrs" @input="_input" v-on="listeners">
     <slot v-for="(value, key) in $slots" :name="key" :slot="key"></slot>

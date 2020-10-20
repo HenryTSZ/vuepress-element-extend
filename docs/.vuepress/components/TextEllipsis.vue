@@ -1,10 +1,3 @@
-<!--
- * @Author: HenryTSZ
- * @Date: 2020-08-18 16:46:52
- * @Description:
- * @LastEditors: HenryTSZ
- * @LastEditTime: 2020-09-15 14:09:58
--->
 <template>
   <el-tooltip class="text-ellipsis" v-bind="$attrs" :disabled="disabled" :content="content">
     <div @mouseenter.stop="handleMouseEnter">

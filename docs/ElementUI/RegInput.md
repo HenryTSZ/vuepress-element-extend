@@ -4,6 +4,8 @@
 
 封装思路: [基于 ElementUI 封装的 NumberInput | Henry](https://tsz.now.sh/2020/05/10/based-on-element-ui-encapsulation-number-input/)
 
+[源码](https://github.com/HenryTSZ/vuepress-element-extend/blob/master/docs/.vuepress/components/RegInput.vue)
+
 ## 基础用法
 
 :::demo 将 `el-input` 改为 `reg-input` 即可. 默认可以输入任何内容

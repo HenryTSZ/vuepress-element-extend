@@ -1,10 +1,3 @@
-<!--
- * @Author: HenryTSZ
- * @Date: 2020-05-07 13:30:49
- * @Description:
- * @LastEditors: HenryTSZ
- * @LastEditTime: 2020-10-07 20:55:46
--->
 <template>
   <component
     :is="item.component"

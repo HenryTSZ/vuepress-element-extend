@@ -8,6 +8,8 @@
 
 封装思路: [基于 ElementUI 封装的 TextEllipsis | Henry](https://tsz.now.sh/2020/09/03/based-on-element-ui-encapsulation-text-ellipsis/)
 
+[源码](https://github.com/HenryTSZ/vuepress-element-extend/blob/master/docs/.vuepress/components/TextEllipsis.vue)
+
 ## 基础用法
 
 :::demo 传入 `content` 即可, 仅支持简单的文本

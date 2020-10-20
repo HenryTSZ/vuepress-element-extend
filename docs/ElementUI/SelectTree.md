@@ -4,6 +4,8 @@
 
 封装思路: [基于 ElementUI 封装的 SelectTree | Henry](https://tsz.now.sh/2019/11/29/based-on-element-ui-encapsulation-select-tree/)
 
+[源码](https://github.com/HenryTSZ/vuepress-element-extend/blob/master/docs/.vuepress/components/SelectTree.vue)
+
 ## 基础用法
 
 适用广泛的基础单选

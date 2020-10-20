@@ -2,6 +2,8 @@
 
 基于 `el-upload` 封装的上传组件, 上传时弹出进度条
 
+[源码](https://github.com/HenryTSZ/vuepress-element-extend/blob/master/docs/.vuepress/components/UploadFile.vue)
+
 ## 点击上传 - 弹窗显示进度条
 
 :::demo 通过 `show-file-list` 来判断是否弹窗显示进度条, 默认为 `false`, 弹窗显示进度条

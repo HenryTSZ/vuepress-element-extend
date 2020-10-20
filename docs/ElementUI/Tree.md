@@ -11,6 +11,8 @@
 
 封装思路: [基于 ElementUI 封装的 Tree | Henry](https://tsz.now.sh/2020/01/02/based-on-element-ui-encapsulation-tree/), [基于 ElementUI 封装的 Tree2 | Henry](https://tsz.now.sh/2020/01/31/based-on-element-ui-encapsulation-tree-2/)
 
+[源码](https://github.com/HenryTSZ/vuepress-element-extend/blob/master/docs/.vuepress/components/Tree.vue)
+
 ## 基础用法
 
 基础的树形结构展示.

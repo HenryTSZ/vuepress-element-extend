@@ -1,10 +1,3 @@
-<!--
- * @Author: HenryTSZ
- * @Date: 2020-01-31 11:15:30
- * @Description: https://vue-element-extend.now.sh/#/element-ui/TreeDemo
- * @LastEditors: HenryTSZ
- * @LastEditTime: 2020-09-22 10:30:07
- -->
 <template>
   <div class="b-tree">
     <el-checkbox

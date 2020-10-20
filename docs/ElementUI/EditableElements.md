@@ -6,6 +6,8 @@
 
 封装思路: [基于 ElementUI 封装的基础 table 和 form | Henry](https://tsz.now.sh/2020/05/16/based-on-element-ui-encapsulation-table-form/)
 
+[源码](https://github.com/HenryTSZ/vuepress-element-extend/blob/master/docs/.vuepress/components/EditableElements.vue)
+
 ## 简单组件 - Input 等
 
 :::demo 传入 `model` 及 `item` 即可; `model` 为 `v-model` 的对象, `item` 为组件属性集合, 具体参见 [EditableElements - item](/ElementUI/EditableElements.html#item)

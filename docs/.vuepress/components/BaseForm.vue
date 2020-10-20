@@ -1,10 +1,3 @@
-<!--
- * @Author: HenryTSZ
- * @Date: 2020-03-21 10:13:51
- * @Description:
- * @LastEditors: HenryTSZ
- * @LastEditTime: 2020-10-12 18:34:40
--->
 <template>
   <el-form v-bind="$attrs" :model="model" ref="elForm" class="base-form">
     <slot name="prev"></slot>
