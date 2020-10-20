@@ -115,6 +115,9 @@ export default {
             label: column[this.props.label || 'label']
           }))
         : this.columns
+    },
+    isEditable() {
+      return this.columns.some(item => item.editable || item.editableMethod)
     }
   },
   watch: {
@@ -129,6 +132,7 @@ export default {
       async handler() {
         await this.handleData()
         this.setDefaultCheckedKeys()
+        this.refreshLayout()
         this.setCurrentNodeKey()
       },
       deep: true,
@@ -240,6 +244,15 @@ export default {
           this.$refs[this.ref].setCurrentRow(row)
         }
       }
+    },
+    // 重新计算高度
+    refreshLayout() {
+      if (!this.isEditable) return
+      this.$nextTick(() => {
+        setTimeout(() => {
+          this.$refs.elTable.doLayout()
+        }, 200)
+      })
     },
 
     select(selection, row) {

@@ -14,7 +14,7 @@
 
 ```html
 <template>
-  <el-table :data="tableData" style="width: 100%">
+  <el-table :data="tableData" style="width: 100%" height="250px">
     <el-table-column prop="date" label="日期" width="180"> </el-table-column>
     <el-table-column prop="name" label="姓名" width="180"> </el-table-column>
     <el-table-column prop="address" label="地址"> </el-table-column>
@@ -156,7 +156,7 @@
 :::demo `columns` 里增加 `editable: true` 即可, 同时需要传入 `component` 和 `type` 等参数, 具体参见 [EditableElements - item](/ElementUI/EditableElements.html#item)
 
 ```html
-<base-table :data="data" :columns="columns"></base-table>
+<base-table :data="data" :columns="columns" height="280px"></base-table>
 <script>
   export default {
     data() {

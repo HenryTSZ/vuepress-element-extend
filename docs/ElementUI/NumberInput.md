@@ -90,11 +90,6 @@
     }
   }
 </script>
-<style>
-.el-input {
-  margin: 0 10px;
-}
-</style>
 ```
 
 :::
