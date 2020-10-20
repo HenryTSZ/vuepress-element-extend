@@ -52,7 +52,8 @@ module.exports = {
             'UploadFile',
             'EditableElements',
             'BaseForm',
-            'BaseTable'
+            'BaseTable',
+            'TreeTable'
           ]
         }
       ]

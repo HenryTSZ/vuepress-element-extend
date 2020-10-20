@@ -3,6 +3,7 @@
     class="tree-table"
     :ref="ref"
     :data="data"
+    :row-key="rowKey"
     v-bind="$attrs"
     v-on="{ ...$listeners, select, 'select-all': selectAll, 'selection-change': selectionChange }"
   >
@@ -15,7 +16,9 @@
       >
         <template slot-scope="{ row, $index }">
           <editable-elements
-            v-if="!column.editableMethod || column.editableMethod(row, column, row[column.prop], $index)"
+            v-if="
+              !column.editableMethod || column.editableMethod(row, column, row[column.prop], $index)
+            "
             :model="row"
             :item="{ ...column, focus: index === focusCol && $index === focusRow }"
             @change="change(row, $event, column)"
@@ -54,6 +57,20 @@ export default {
       default() {
         return []
       }
+    },
+    rowKey: {
+      type: [String, Function],
+      default: 'id'
+    },
+    defaultCheckedKeys: {
+      type: Array,
+      default() {
+        return []
+      }
+    },
+    currentNodeKey: {
+      type: [String, Number],
+      default: ''
     },
     focusRow: {
       type: Number,
@@ -109,10 +126,16 @@ export default {
       handler: 'expandToLevel'
     },
     data: {
-      handler: 'handleData',
+      async handler() {
+        await this.handleData()
+        this.setDefaultCheckedKeys()
+        this.setCurrentNodeKey()
+      },
       deep: true,
       immediate: true
-    }
+    },
+    defaultCheckedKeys: 'setDefaultCheckedKeys',
+    currentNodeKey: 'setCurrentNodeKey'
   },
   methods: {
     async expandToLevel() {
@@ -149,6 +172,74 @@ export default {
         this.children = this.$refs[this.ref].treeProps.children
         return Promise.resolve()
       })
+    },
+    // 设置默认选中
+    async setDefaultCheckedKeys() {
+      if (!this.children) {
+        await this.handleData()
+      }
+      if (this.defaultCheckedKeys.length) {
+        let rows = []
+        const findChildren = arr => {
+          arr[this.children].forEach(item => {
+            rows.push(item)
+            if (item[this.children]) {
+              findChildren(item)
+            }
+          })
+        }
+        const findRows = arr => {
+          if (this.checkStrictly) {
+            arr.forEach(item => {
+              if (this.defaultCheckedKeys.includes(item[this.rowKey])) {
+                rows.push(item)
+              }
+              if (item[this.children]) {
+                findRows(item[this.children])
+              }
+            })
+          } else {
+            arr.forEach(item => {
+              if (this.defaultCheckedKeys.includes(item[this.rowKey])) {
+                rows.push(item)
+                if (item[this.children]) {
+                  findChildren(item)
+                }
+              } else if (item[this.children]) {
+                findRows(item[this.children])
+              }
+            })
+          }
+        }
+        findRows(this.data)
+        rows.forEach(row => {
+          this.$refs[this.ref].toggleRowSelection(row, true)
+        })
+      }
+    },
+    async setCurrentNodeKey() {
+      if (!this.children) {
+        await this.handleData()
+      }
+      if (this.currentNodeKey) {
+        let row = null
+        const findRow = arr => {
+          arr.some(item => {
+            if (this.currentNodeKey === item[this.rowKey]) {
+              row = item
+              return true
+            } else if (item[this.children]) {
+              return findRow(item[this.children])
+            } else {
+              return false
+            }
+          })
+        }
+        findRow(this.data)
+        if (row) {
+          this.$refs[this.ref].setCurrentRow(row)
+        }
+      }
     },
 
     select(selection, row) {

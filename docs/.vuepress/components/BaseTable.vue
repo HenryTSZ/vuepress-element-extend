@@ -3,10 +3,17 @@
  * @Date: 2020-04-11 15:27:42
  * @Description: https://vue-element-extend.now.sh/#/element-ui/BaseTableDemo
  * @LastEditors: HenryTSZ
- * @LastEditTime: 2020-10-12 16:57:23
+ * @LastEditTime: 2020-10-20 12:21:10
  -->
 <template>
-  <el-table ref="elTable" class="base-table" :data="data" v-bind="$attrs" v-on="$listeners">
+  <el-table
+    ref="elTable"
+    class="base-table"
+    :data="data"
+    :row-key="rowKey"
+    v-bind="$attrs"
+    v-on="$listeners"
+  >
     <slot name="prev"></slot>
     <template v-for="(column, index) in cols">
       <el-table-column
@@ -100,14 +107,8 @@ export default {
       },
       immediate: true
     },
-    defaultCheckedKeys: {
-      handler: 'setDefaultCheckedKeys',
-      immediate: true
-    },
-    currentNodeKey: {
-      handler: 'setCurrentNodeKey',
-      immediate: true
-    }
+    defaultCheckedKeys: 'setDefaultCheckedKeys',
+    currentNodeKey: 'setCurrentNodeKey'
   },
   methods: {
     change(row, e, column) {

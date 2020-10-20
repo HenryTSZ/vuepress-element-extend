@@ -1,122 +1,78 @@
-# BaseTable 基础表格
+# TreeTable 树形表格
 
-简化 `el-form` 重复代码, 最少仅需要一行代码即可
+基于 `el-table` 封装的 `tree-table` , 解决了 `el-table` 树形结构的两个问题:
 
-封装思路: [基于 ElementUI 封装的基础 table 和 form | Henry](https://tsz.now.sh/2020/05/16/based-on-element-ui-encapsulation-table-form/)
+1. 没有展开到 `level` 级的功能
+2. 表头的 `checkbox` 只能控制第一层级的 `checkbox` , 无法控制子级
 
-## 基础表格
+封装思路: [基于 ElementUI 封装的 TreeTable | Henry](https://tsz.now.sh/2020/04/04/based-on-element-ui-encapsulation-tree-table/)
 
-基础的表格展示用法.
+## 基础用法
 
-:::demo 参见 [ElementUI-Table](https://element.eleme.cn/2.13/#/zh-CN/component/table) 用法, 只需要将最外层 `<el-table>` 替换为 `<base-table>` 即可
+参考 [BaseTable](/ElementUI/BaseTable.html)
+
+## 展开到 `level` 级
+
+适用于需要展开层级时使用
+
+:::demo 通过 `level` 设置展开层级, `Number` , `0` : 展开全部, `1` : 展开到一级, ...; `@max-level` 获取最大层级. 通过 `refreshLevel` 来重新渲染展开折叠: [String, Number], 有时候在 `level` 不变的情况下需要重新渲染展开折叠
 
 ```html
-<template>
-  <el-table :data="tableData" style="width: 100%">
-    <el-table-column prop="date" label="日期" width="180"> </el-table-column>
-    <el-table-column prop="name" label="姓名" width="180"> </el-table-column>
-    <el-table-column prop="address" label="地址"> </el-table-column>
-  </el-table>
-</template>
+展开到 <el-input-number v-model="level" :min="0" :max="maxLevel"></el-input-number> 级
+<tree-table :data="data" :columns="columns" :level="level" @max-level="getMaxLevel"></tree-table>
 
 <script>
   export default {
     data() {
       return {
-        tableData: [
+        level: 1,
+        maxLevel: 1,
+        data: [
           {
+            id: 1,
             date: '2016-05-02',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1518 弄'
           },
           {
+            id: 2,
             date: '2016-05-04',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1517 弄'
           },
           {
+            id: 3,
             date: '2016-05-01',
             name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄'
+            address: '上海市普陀区金沙江路 1519 弄',
+            children: [
+              {
+                id: 31,
+                date: '2016-05-01',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1519 弄'
+              },
+              {
+                id: 32,
+                date: '2016-05-01',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1519 弄',
+                children: [
+                  {
+                    id: 321,
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1519 弄'
+                  }
+                ]
+              }
+            ]
           },
           {
+            id: 4,
             date: '2016-05-03',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1516 弄'
-          }
-        ]
-      }
-    }
-  }
-</script>
-```
-
-:::
-
-## 仅展示
-
-:::demo `<base-table>` 增加一个 `Attributes` : `columns` , 里面参数参见 [table-column-attributes](https://element.eleme.cn/#/zh-CN/component/table#table-column-attributes)
-
-```html
-<base-table :data="data" :columns="columns"></base-table>
-<script>
-  export default {
-    data() {
-      const findVal = (data, key, value = 'value', label = 'label') => {
-        let target
-        data.some(item => {
-          if (item[value] === key) {
-            target = item[label]
-            return true
-          } else {
-            return false
-          }
-        })
-        return target
-      }
-      const addressMap = [
-        {
-          label: '上海市普陀区金沙江路 1519 弄',
-          value: '1519'
-        },
-        {
-          label: '上海市普陀区金沙江路 1518 弄',
-          value: '1518'
-        },
-        {
-          label: '上海市普陀区金沙江路 1517 弄',
-          value: '1517'
-        },
-        {
-          label: '上海市普陀区金沙江路 1516 弄',
-          value: '1516'
-        }
-      ]
-      return {
-        data: [
-          {
-            name: '王小虎',
-            age: 19,
-            money: 19.99,
-            address: '1519'
-          },
-          {
-            name: '王小虎',
-            age: 18,
-            money: 18.99,
-            address: '1518'
-          },
-          {
-            name: '王小虎',
-            age: 17,
-            money: 17.99,
-            address: '1517'
-          },
-          {
-            name: '王小虎',
-            age: 16,
-            money: 16.99,
-            address: '1516'
           }
         ],
         columns: [
@@ -125,22 +81,20 @@
             prop: 'name'
           },
           {
-            label: '年龄',
-            prop: 'age'
-          },
-          {
-            label: '资产',
-            prop: 'money'
+            label: '日期',
+            prop: 'date'
           },
           {
             label: '住址',
             prop: 'address',
-            width: '300px',
-            formatter(row) {
-              return findVal(addressMap, row.address)
-            }
+            width: '300px'
           }
         ]
+      }
+    },
+    methods: {
+      getMaxLevel(maxLevel) {
+        this.maxLevel = maxLevel
       }
     }
   }
@@ -149,333 +103,94 @@
 
 :::
 
-## 可编辑
+## 全选
 
-:::demo `columns` 里增加 `editable: true` 即可, 同时需要传入 `component` 和 `type` 等参数, 具体参见 [EditableElements - item](/ElementUI/EditableElements.html#item)
+适用于需要选择层级时使用.
 
-```html
-<base-table :data="data" :columns="columns"></base-table>
-<script>
-  export default {
-    data() {
-      const findVal = (data, key, value = 'value', label = 'label') => {
-        let target
-        data.some(item => {
-          if (item[value] === key) {
-            target = item[label]
-            return true
-          } else {
-            return false
-          }
-        })
-        return target
-      }
-      const addressMap = [
-        {
-          label: '上海市普陀区金沙江路 1519 弄',
-          value: '1519'
-        },
-        {
-          label: '上海市普陀区金沙江路 1518 弄',
-          value: '1518'
-        },
-        {
-          label: '上海市普陀区金沙江路 1517 弄',
-          value: '1517'
-        },
-        {
-          label: '上海市普陀区金沙江路 1516 弄',
-          value: '1516'
-        }
-      ]
-      return {
-        data: [
-          {
-            name: '王小虎',
-            age: 19,
-            money: 19.99,
-            address: '1519'
-          },
-          {
-            name: '王小虎',
-            age: 18,
-            money: 18.99,
-            address: '1518'
-          },
-          {
-            name: '王小虎',
-            age: 17,
-            money: 17.99,
-            address: '1517'
-          },
-          {
-            name: '王小虎',
-            age: 16,
-            money: 16.99,
-            address: '1516'
-          }
-        ],
-        columns: [
-          {
-            label: '名字',
-            prop: 'name',
-            editable: true,
-            component: 'el-input',
-            type: 'text'
-          },
-          {
-            label: '年龄',
-            prop: 'age',
-            editable: true,
-            component: 'number-input',
-            type: 'integer'
-          },
-          {
-            label: '资产',
-            prop: 'money',
-            editable: true,
-            component: 'number-input'
-          },
-          {
-            label: '住址',
-            prop: 'address',
-            width: '300px',
-            editable: true,
-            component: 'el-select',
-            type: 'select',
-            options: addressMap,
-            formatter(row) {
-              return findVal(addressMap, row.address)
-            }
-          }
-        ]
-      }
-    }
-  }
-</script>
-```
-
-:::
-
-## 自定义可编辑
-
-:::demo `columns` 里增加 `editableMethod` 即可. 如本例中只有年龄大于 `17` 才能修改住址
+::: demo `check-strictly` : `Boolean` , 同 `el-tree` , 在显示复选框的情况下, 是否严格的遵循父子不互相关联的做法, 默认为 `false` ; `check-all` : `Boolean` , 点击表头的多选框时, 是否影响全部数据, 默认为 `true`
 
 ```html
-<base-table :data="data" :columns="columns"></base-table>
-<script>
-  export default {
-    data() {
-      const findVal = (data, key, value = 'value', label = 'label') => {
-        let target
-        data.some(item => {
-          if (item[value] === key) {
-            target = item[label]
-            return true
-          } else {
-            return false
-          }
-        })
-        return target
-      }
-      const addressMap = [
-        {
-          label: '上海市普陀区金沙江路 1519 弄',
-          value: '1519'
-        },
-        {
-          label: '上海市普陀区金沙江路 1518 弄',
-          value: '1518'
-        },
-        {
-          label: '上海市普陀区金沙江路 1517 弄',
-          value: '1517'
-        },
-        {
-          label: '上海市普陀区金沙江路 1516 弄',
-          value: '1516'
-        }
-      ]
-      return {
-        data: [
-          {
-            name: '王小虎',
-            age: 19,
-            money: 19.99,
-            address: '1519'
-          },
-          {
-            name: '王小虎',
-            age: 18,
-            money: 18.99,
-            address: '1518'
-          },
-          {
-            name: '王小虎',
-            age: 17,
-            money: 17.99,
-            address: '1517'
-          },
-          {
-            name: '王小虎',
-            age: 16,
-            money: 16.99,
-            address: '1516'
-          }
-        ],
-        columns: [
-          {
-            label: '名字',
-            prop: 'name',
-            editable: true,
-            component: 'el-input',
-            type: 'text'
-          },
-          {
-            label: '年龄',
-            prop: 'age',
-            editable: true,
-            component: 'number-input',
-            type: 'integer'
-          },
-          {
-            label: '资产',
-            prop: 'money',
-            editable: true,
-            component: 'number-input'
-          },
-          {
-            label: '住址',
-            prop: 'address',
-            width: '300px',
-            editableMethod(row) {
-              return row.age > 17
-            },
-            component: 'el-select',
-            type: 'select',
-            options: addressMap,
-            formatter(row) {
-              return findVal(addressMap, row.address)
-            }
-          }
-        ]
-      }
-    }
-  }
-</script>
-```
-
-:::
-
-## 自动聚焦行列
-
-:::demo 通过 `focus-row` 和 `focus-col` 控制聚焦行列
-
-```html
-行:
-<el-input-number v-model="focusRow" :min="0" :max="3"></el-input-number>
-列:
-<el-input-number v-model="focusCol" :min="0" :max="3"></el-input-number>
-<base-table
+<span>check-strictly: <el-switch v-model="checkStrictly"></el-switch></span>
+<span>check-all: <el-switch v-model="checkAll"></el-switch></span>
+<tree-table
   :data="data"
   :columns="columns"
-  :focus-row="focusRow"
-  :focus-col="focusCol"
-></base-table>
+  :check-strictly="checkStrictly"
+  :check-all="checkAll"
+  default-expand-all
+>
+</tree-table>
+
 <script>
   export default {
     data() {
-      const findVal = (data, key, value = 'value', label = 'label') => {
-        let target
-        data.some(item => {
-          if (item[value] === key) {
-            target = item[label]
-            return true
-          } else {
-            return false
-          }
-        })
-        return target
-      }
-      const addressMap = [
-        {
-          label: '上海市普陀区金沙江路 1519 弄',
-          value: '1519'
-        },
-        {
-          label: '上海市普陀区金沙江路 1518 弄',
-          value: '1518'
-        },
-        {
-          label: '上海市普陀区金沙江路 1517 弄',
-          value: '1517'
-        },
-        {
-          label: '上海市普陀区金沙江路 1516 弄',
-          value: '1516'
-        }
-      ]
       return {
-        focusRow: 0,
-        focusCol: 0,
+        checkStrictly: false,
+        checkAll: true,
         data: [
           {
+            id: 1,
+            date: '2016-05-02',
             name: '王小虎',
-            age: 19,
-            money: 19.99,
-            address: '1519'
+            address: '上海市普陀区金沙江路 1518 弄'
           },
           {
+            id: 2,
+            date: '2016-05-04',
             name: '王小虎',
-            age: 18,
-            money: 18.99,
-            address: '1518'
+            address: '上海市普陀区金沙江路 1517 弄'
           },
           {
+            id: 3,
+            date: '2016-05-01',
             name: '王小虎',
-            age: 17,
-            money: 17.99,
-            address: '1517'
+            address: '上海市普陀区金沙江路 1519 弄',
+            children: [
+              {
+                id: 31,
+                date: '2016-05-01',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1519 弄'
+              },
+              {
+                id: 32,
+                date: '2016-05-01',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1519 弄',
+                children: [
+                  {
+                    id: 321,
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1519 弄'
+                  }
+                ]
+              }
+            ]
           },
           {
+            id: 4,
+            date: '2016-05-03',
             name: '王小虎',
-            age: 16,
-            money: 16.99,
-            address: '1516'
+            address: '上海市普陀区金沙江路 1516 弄'
           }
         ],
         columns: [
           {
+            type: 'selection'
+          },
+          {
             label: '名字',
-            prop: 'name',
-            editable: true,
-            component: 'el-input',
-            type: 'text'
+            prop: 'name'
           },
           {
-            label: '年龄',
-            prop: 'age',
-            editable: true,
-            component: 'number-input',
-            type: 'integer'
-          },
-          {
-            label: '资产',
-            prop: 'money',
-            editable: true,
-            component: 'number-input'
+            label: '日期',
+            prop: 'date'
           },
           {
             label: '住址',
             prop: 'address',
-            width: '300px',
-            editable: true,
-            component: 'el-select',
-            type: 'select',
-            options: addressMap,
-            formatter(row) {
-              return findVal(addressMap, row.address)
-            }
+            width: '300px'
           }
         ]
       }
@@ -488,104 +203,99 @@
 
 ## 默认选中
 
-:::demo 通过传入 `current-node-key` 和 `default-checked-keys` 设置默认选中, 必须传入 `row-key` , 默认为 `id` . 此例同时展示了通过 `slot` 来传入列, 默认在 `columns` 后面, 通过具名 `prev` 可以设置到 `columns` 前面
+:::demo 通过传入 `current-node-key` 和 `default-checked-keys` 设置默认选中, 必须传入 `row-key` , 默认为 `id` . `default-checked-keys` 受 `check-strictly` 的影响
 
 ```html
-<p class="tc">单选</p>
-<base-table
+<p class="tc">check-strictly: true</p>
+<tree-table
   :data="data"
   :columns="columns"
+  :default-checked-keys="[3, 32, 4]"
+  :current-node-key="31"
   highlight-current-row
-  row-key="age"
-  :current-node-key="18"
+  default-expand-all
+  check-strictly
 >
-  <el-table-column type="index" width="50" label="序号"></el-table-column>
-</base-table>
-<p class="tc">多选</p>
-<base-table :data="data" :columns="columns" row-key="age" :default-checked-keys="[17, 19]">
-  <el-table-column slot="prev" type="selection" width="55"></el-table-column>
-</base-table>
+</tree-table>
+<p class="tc">check-strictly: false</p>
+<tree-table
+  :data="data"
+  :columns="columns"
+  :default-checked-keys="[3, 32, 4]"
+  :current-node-key="31"
+  highlight-current-row
+  default-expand-all
+>
+</tree-table>
 
 <script>
   export default {
     data() {
-      const findVal = (data, key, value = 'value', label = 'label') => {
-        let target
-        data.some(item => {
-          if (item[value] === key) {
-            target = item[label]
-            return true
-          } else {
-            return false
-          }
-        })
-        return target
-      }
-      const addressMap = [
-        {
-          label: '上海市普陀区金沙江路 1519 弄',
-          value: '1519'
-        },
-        {
-          label: '上海市普陀区金沙江路 1518 弄',
-          value: '1518'
-        },
-        {
-          label: '上海市普陀区金沙江路 1517 弄',
-          value: '1517'
-        },
-        {
-          label: '上海市普陀区金沙江路 1516 弄',
-          value: '1516'
-        }
-      ]
       return {
         data: [
           {
+            id: 1,
+            date: '2016-05-02',
             name: '王小虎',
-            age: 19,
-            money: 19.99,
-            address: '1519'
+            address: '上海市普陀区金沙江路 1518 弄'
           },
           {
+            id: 2,
+            date: '2016-05-04',
             name: '王小虎',
-            age: 18,
-            money: 18.99,
-            address: '1518'
+            address: '上海市普陀区金沙江路 1517 弄'
           },
           {
+            id: 3,
+            date: '2016-05-01',
             name: '王小虎',
-            age: 17,
-            money: 17.99,
-            address: '1517'
+            address: '上海市普陀区金沙江路 1519 弄',
+            children: [
+              {
+                id: 31,
+                date: '2016-05-01',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1519 弄'
+              },
+              {
+                id: 32,
+                date: '2016-05-01',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1519 弄',
+                children: [
+                  {
+                    id: 321,
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1519 弄'
+                  }
+                ]
+              }
+            ]
           },
           {
+            id: 4,
+            date: '2016-05-03',
             name: '王小虎',
-            age: 16,
-            money: 16.99,
-            address: '1516'
+            address: '上海市普陀区金沙江路 1516 弄'
           }
         ],
         columns: [
+          {
+            type: 'selection'
+          },
           {
             label: '名字',
             prop: 'name'
           },
           {
-            label: '年龄',
-            prop: 'age'
-          },
-          {
-            label: '资产',
-            prop: 'money'
+            label: '日期',
+            prop: 'date'
           },
           {
             label: '住址',
             prop: 'address',
-            width: '300px',
-            formatter(row) {
-              return findVal(addressMap, row.address)
-            }
+            width: '300px'
           }
         ]
       }
@@ -602,6 +312,10 @@
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------- | --------------------------------------------------------------- |
 | data                    | 显示的数据                                                                                                                                                                                                    | array                                                 | —                               | —                                                               |
 | columns                 | 列属性集合, 具体看下表                                                                                                                                                                                        | array                                                 | —                               | —                                                               |
+| level                   | 展开层级                                                                                                                                                                                                      | number                                                | 0: 展开全部, 1: 展开到一级, ... | 1                                                               |
+| refresh-level           | 重新渲染展开折叠, 有时候在 level 不变的情况下需要重新渲染展开折叠                                                                                                                                             | string, number                                        | —                               | —                                                               |
+| check-strictly          | 在显示复选框的情况下, 是否严格的遵循父子不互相关联的做法                                                                                                                                                      | boolean                                               | —                               | false                                                           |
+| check-all               | 点击表头的多选框时, 是否影响全部数据                                                                                                                                                                          | boolean                                               | —                               | true                                                            |
 | props                   | 统一配置 `columns` 的 `prop` 及 `label`                                                                                                                                                                       | object                                                | —                               | `{ prop: 'prop', label: 'label' }`                              |
 | focus-row               | 自动聚焦行                                                                                                                                                                                                    | number                                                | —                               | 0                                                               |
 | focus-col               | 自动聚焦列                                                                                                                                                                                                    | number                                                | —                               | 0                                                               |
@@ -678,6 +392,7 @@
 
 | 事件名             | 说明                                                                                                                                        | 参数                              |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
+| max-level          | 最大层级                                                                                                                                    | level                             |
 | row-change         | 可编辑数据发生变化时触发                                                                                                                    | row, value, prop                  |
 | select             | 当用户手动勾选数据行的 Checkbox 时触发的事件                                                                                                | selection, row                    |
 | select-all         | 当用户手动勾选全选 Checkbox 时触发的事件                                                                                                    | selection                         |
