@@ -4,7 +4,7 @@
 
 只能输入数字为什么要加引号呢? 因为输入小数的时候, `1.` 也是可以验证通过了, 输入负数的时候, 就一个负号 `-` 也是可以验证通过的, 只能说是相对来说限制为数字
 
-封装思路: [基于 ElementUI 封装的 NumberInput | Henry](https://tsz.now.sh/2020/05/10/based-on-element-ui-encapsulation-number-input/)
+封装思路: [基于 ElementUI 封装的 NumberInput | Henry](https://tszv.now.sh/pages/6da7e6/)
 
 [源码](https://github.com/HenryTSZ/vuepress-element-extend/blob/master/docs/.vuepress/components/NumberInput.vue)
 

@@ -31,6 +31,7 @@
 import Tree from './Tree'
 export default {
   name: 'SelectTree',
+  inheritAttrs: false,
   components: { Tree },
   props: {
     value: {

@@ -5,7 +5,7 @@
 1. 没有展开到 `level` 级的功能
 2. 表头的 `checkbox` 只能控制第一层级的 `checkbox` , 无法控制子级
 
-封装思路: [基于 ElementUI 封装的 TreeTable | Henry](https://tsz.now.sh/2020/04/04/based-on-element-ui-encapsulation-tree-table/)
+封装思路: [基于 ElementUI 封装的 TreeTable | Henry](https://tszv.now.sh/pages/3b3de3/)
 
 [源码](https://github.com/HenryTSZ/vuepress-element-extend/blob/master/docs/.vuepress/components/TreeTable.vue)
 

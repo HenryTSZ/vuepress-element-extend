@@ -37,8 +37,11 @@
 </template>
 
 <script>
+import EditableElements from './EditableElements'
 export default {
   name: 'TreeTable',
+  inheritAttrs: false,
+  components: { EditableElements },
   props: {
     props: {
       type: Object,

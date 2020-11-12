@@ -23,10 +23,13 @@
 </template>
 
 <script>
+import EditableElements from './EditableElements'
 import { selectMap, handlePlaceholder } from 'utils'
 
 export default {
   name: 'BaseForm',
+  inheritAttrs: false,
+  component: { EditableElements },
   props: {
     props: {
       type: Object,

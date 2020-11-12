@@ -35,7 +35,7 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/' },
       { text: 'ElementUI', link: '/ElementUI/' },
-      { text: 'Blog', link: 'https://tsz.now.sh' }
+      { text: 'Blog', link: 'https://tszv.now.sh/pages/e29708/' }
     ],
     sidebar: {
       '/ElementUI/': [

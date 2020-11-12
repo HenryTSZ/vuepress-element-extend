@@ -6,8 +6,8 @@
 
 <script>
 export default {
-  inheritAttrs: false,
   name: 'RegInput',
+  inheritAttrs: false,
   props: {
     value: {
       type: [Number, String],

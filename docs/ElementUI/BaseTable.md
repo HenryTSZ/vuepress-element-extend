@@ -2,7 +2,7 @@
 
 简化 `el-form` 重复代码, 最少仅需要一行代码即可
 
-封装思路: [基于 ElementUI 封装的基础 table 和 form | Henry](https://tsz.now.sh/2020/05/16/based-on-element-ui-encapsulation-table-form/)
+封装思路: [基于 ElementUI 封装的基础 table 和 form | Henry](https://tszv.now.sh/pages/eaab52/)
 
 [源码](https://github.com/HenryTSZ/vuepress-element-extend/blob/master/docs/.vuepress/components/BaseTable.vue)
 

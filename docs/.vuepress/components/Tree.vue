@@ -33,10 +33,13 @@
 </template>
 
 <script>
+import TextEllipsis from './TextEllipsis'
 const childNodes = 'childNodes'
 
 export default {
   name: 'Tree',
+  inheritAttrs: false,
+  component: { TextEllipsis },
   props: {
     data: {
       type: Array,

@@ -9,7 +9,7 @@
 5. 过滤保留子节点
 6. 单选只能选择叶子节点
 
-封装思路: [基于 ElementUI 封装的 Tree | Henry](https://tsz.now.sh/2020/01/02/based-on-element-ui-encapsulation-tree/), [基于 ElementUI 封装的 Tree2 | Henry](https://tsz.now.sh/2020/01/31/based-on-element-ui-encapsulation-tree-2/)
+封装思路: [基于 ElementUI 封装的 Tree | Henry](https://tszv.now.sh/pages/117ce8/), [基于 ElementUI 封装的 Tree2 | Henry](https://tszv.now.sh/pages/e764d3/)
 
 [源码](https://github.com/HenryTSZ/vuepress-element-extend/blob/master/docs/.vuepress/components/Tree.vue)
 
@@ -489,7 +489,7 @@
 
 ## 过滤保留子节点
 
-`ElementUI` 官方例子不会返回过滤节点的子节点, 具体可以参见: [el-tree 节点过滤加载对应子节点 | Henry](https://tsz.now.sh/2020/01/12/el-tree-node-filter-loads-corresponding-child-nodes/)
+`ElementUI` 官方例子不会返回过滤节点的子节点, 具体可以参见: [el-tree 节点过滤加载对应子节点 | Henry](https://tszv.now.sh/pages/e55264/)
 
 :::demo 不传入 `filter-node-method` 即可, 使用 `Tree` 默认过滤方法; 传入即覆盖默认过滤方法
 

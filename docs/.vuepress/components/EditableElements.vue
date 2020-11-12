@@ -35,11 +35,13 @@
 </template>
 
 <script>
+import TextEllipsis from './TextEllipsis'
 import { handlePlaceholder } from 'utils'
 
 export default {
   name: 'EditableElements',
   inheritAttrs: false,
+  component: { TextEllipsis },
   props: {
     item: {
       type: Object,

@@ -9,6 +9,7 @@
 <script>
 export default {
   name: 'TextEllipsis',
+  inheritAttrs: false,
   props: {
     content: {
       type: String,

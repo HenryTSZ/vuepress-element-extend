@@ -21,6 +21,7 @@ const EDITOR_CONFIG_ID = 'configScriptTag'
 
 export default {
   name: 'UEditor',
+  inheritAttrs: false,
   data() {
     return {
       ueId: `editor_${Math.random()

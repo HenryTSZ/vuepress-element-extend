@@ -37,8 +37,11 @@
 </template>
 
 <script>
+import EditableElements from './EditableElements'
 export default {
   name: 'BaseTable',
+  inheritAttrs: false,
+  computed: { EditableElements },
   props: {
     data: {
       type: Array,

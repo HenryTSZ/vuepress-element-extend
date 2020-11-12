@@ -2,7 +2,7 @@
 
 基于 `el-select` 和 `tree` 封装的树形选择器
 
-封装思路: [基于 ElementUI 封装的 SelectTree | Henry](https://tsz.now.sh/2019/11/29/based-on-element-ui-encapsulation-select-tree/)
+封装思路: [基于 ElementUI 封装的 SelectTree | Henry](https://tszv.now.sh/pages/42ee92/)
 
 [源码](https://github.com/HenryTSZ/vuepress-element-extend/blob/master/docs/.vuepress/components/SelectTree.vue)
 

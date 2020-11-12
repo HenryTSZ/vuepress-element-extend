@@ -6,7 +6,7 @@
 
 2. 当文本内容溢出, 显示省略号, 并悬浮弹出 `tooltip`
 
-封装思路: [基于 ElementUI 封装的 TextEllipsis | Henry](https://tsz.now.sh/2020/09/03/based-on-element-ui-encapsulation-text-ellipsis/)
+封装思路: [基于 ElementUI 封装的 TextEllipsis | Henry](https://tszv.now.sh/pages/e29708/)
 
 [源码](https://github.com/HenryTSZ/vuepress-element-extend/blob/master/docs/.vuepress/components/TextEllipsis.vue)
 

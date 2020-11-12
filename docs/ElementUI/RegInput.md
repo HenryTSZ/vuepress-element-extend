@@ -2,7 +2,7 @@
 
 基于 `NumberInput` 的思想, 通过传入的正则自定义输入内容的输入框
 
-封装思路: [基于 ElementUI 封装的 NumberInput | Henry](https://tsz.now.sh/2020/05/10/based-on-element-ui-encapsulation-number-input/)
+封装思路: [基于 ElementUI 封装的 NumberInput | Henry](https://tszv.now.sh/pages/6da7e6/#扩展)
 
 [源码](https://github.com/HenryTSZ/vuepress-element-extend/blob/master/docs/.vuepress/components/RegInput.vue)
 
