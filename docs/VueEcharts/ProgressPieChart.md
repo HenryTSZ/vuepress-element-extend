@@ -4,7 +4,7 @@
 
 ```html
 <progress-pie-chart
-  class="chart"
+  class="e-chart"
   v-for="item in pies"
   :key="item.id"
   :options="item.pie"

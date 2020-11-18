@@ -3,7 +3,7 @@
 :::demo 通过 `options` 传入基础配置即可
 
 ```html
-<pie-chart class="chart" v-for="item in pies" :key="item.id" :options="item.pie"></pie-chart>
+<pie-chart class="e-chart" v-for="item in pies" :key="item.id" :options="item.pie"></pie-chart>
 
 <script>
   export default {

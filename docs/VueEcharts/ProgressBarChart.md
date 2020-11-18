@@ -4,7 +4,7 @@
 
 ```html
 <progress-bar-chart
-  class="chart"
+  class="e-chart"
   v-for="item in bars"
   :key="item.id"
   :options="item.bar"

@@ -3,7 +3,7 @@
 :::demo 通过 `options` 传入基础配置即可
 
 ```html
-<line-chart class="chart" v-for="item in lines" :key="item.id" :options="item.line"></line-chart>
+<line-chart class="e-chart" v-for="item in lines" :key="item.id" :options="item.line"></line-chart>
 
 <script>
   export default {
