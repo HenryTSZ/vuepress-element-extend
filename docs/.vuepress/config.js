@@ -35,6 +35,7 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/' },
       { text: 'ElementUI', link: '/ElementUI/' },
+      { text: 'VueEcharts', link: '/VueEcharts/' },
       { text: 'Blog', link: 'https://tszv.now.sh/pages/e29708/' }
     ],
     sidebar: {
@@ -54,6 +55,21 @@ module.exports = {
             'BaseForm',
             'BaseTable',
             'TreeTable'
+          ]
+        }
+      ],
+      '/VueEcharts/': [
+        {
+          title: 'VueEcharts',
+          collapsable: false,
+          children: [
+            '',
+            'LineChart',
+            'BarChart',
+            'PieChart',
+            'ProgressBarChart',
+            'ProgressPieChart',
+            'BarArrowChart'
           ]
         }
       ]

@@ -61,65 +61,109 @@ export default {
   },
   methods: {
     renderChart() {
-      let that = this
-      this.title = this.options.text || this.options.toolboxName || ''
-      let isZoom = this.options.name && this.options.name.length > 10
+      const { name } = this.options
+      if (!name || !name.length) {
+        return
+      }
+      const {
+        text = '',
+        isZoom = name && name.length > 10,
+        isGradient,
+        color = isGradient ? this.baseColors : this.baseColor,
+        textColor = this.textColor,
+        textFontSize = 18,
+        subtext,
+        subtextColor = this.textColor,
+        subtextFontSize = 12,
+        titleTop = 'auto',
+        titleLeft = 'center',
+        backgroundColor = 'transparent',
+        legend = [text],
+        showLegend = legend && legend.length > 1,
+        hideTooltip,
+        legendTop = 25,
+        legendColor = this.textColor,
+        legendFontSize = 12,
+        tooltipType = 'shadow',
+        hideToolBox,
+        toolboxName = text,
+        hideImage,
+        toolboxRight = 25,
+        toolboxTop = 25,
+        gridLeft = '3%',
+        gridRight = '3%',
+        gridBottom = '3%',
+        gridTop = '15%',
+        hideyAxis,
+        yAxisLabel,
+        hideyAxisLabel,
+        hideyAxisLine = false,
+        yAxisMaxLength = 8,
+        yAxisColor = this.textColor,
+        hideyAxisTick = false,
+        yAxisFontSize = 12,
+        inside,
+        insideWidth = 25,
+        insideRadius = 25,
+        insidePosition = 'inside',
+        insideFormat = '{c}',
+        outside,
+        outsideWidth = 25,
+        outsideRadius = 25,
+        outsideBarBack = 'rgba(102, 102, 102, 0.5)'
+      } = this.options
+      this.title = text || toolboxName
       this.polar = {
-        color: this.options.color || this.baseColor,
+        color: color,
         // 标题
         title: {
-          text: this.options.text || '',
+          text: text,
           textStyle: {
-            color: this.options.textColor || this.textColor,
-            fontSize: this.options.textFontSize || 18
+            color: textColor,
+            fontSize: textFontSize
           },
-          subtext:
-            this.options.subtext ||
-            (isZoom ? '当前数据较多，请滚动鼠标或缩放屏幕查看完整数据' : ''),
+          subtext: subtext || (isZoom ? '当前数据较多，请滚动鼠标或缩放屏幕查看完整数据' : ''),
           subtextStyle: {
-            color: this.options.subtextColor || '#f49800',
-            fontSize: this.options.subtextFontSize || 12
+            color: subtextColor,
+            fontSize: subtextFontSize
           },
-          top: this.$utils.checkParam(this.options.titleTop, 'auto'),
-          left: this.$utils.checkParam(this.options.titleLeft, 'center'),
-          backgroundColor: this.options.backgroundColor || 'transparent'
+          top: titleTop,
+          left: titleLeft,
+          backgroundColor: backgroundColor
         },
         // 图例
         legend: {
           type: 'scroll', // 只有容器放不下图例, scroll 才会生效
-          show:
-            this.options.showLegend === false
-              ? false
-              : this.options.showLegend || (this.options.legend && this.options.legend.length > 1),
-          data: this.options.legend || [this.options.text],
-          right: !this.options.hideTooltip ? 60 : 0,
-          top: this.options.legendTop || 25,
+          show: showLegend,
+          data: legend,
+          right: !hideTooltip ? 60 : 0,
+          top: legendTop,
           textStyle: {
-            color: this.options.legendColor || this.textColor,
-            fontSize: this.options.legendFontSize || 12
+            color: legendColor,
+            fontSize: legendFontSize
           }
         },
         // 提示框
         tooltip: {
-          show: !this.options.hideTooltip,
+          show: !hideTooltip,
           trigger: 'axis',
           axisPointer: {
             // 坐标轴指示器，坐标轴触发有效
-            type: this.options.tooltipType || 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+            type: tooltipType // 默认为直线，可选为：'line' | 'shadow'
           }
         },
         // 工具栏
         toolbox: {
-          show: !this.options.hideToolBox,
+          show: !hideToolBox,
           feature: {
             saveAsImage: {
-              show: !this.options.hideImage,
-              name: this.options.toolboxName || this.options.text,
+              show: !hideImage,
+              name: toolboxName,
               backgroundColor: 'rgba(0, 35, 55, 0.4)'
             }
           },
-          right: this.options.toolboxRight || 25,
-          top: this.options.toolboxTop || 25,
+          right: toolboxRight,
+          top: toolboxTop,
           iconStyle: {
             normal: {
               borderColor: this.textColor
@@ -128,10 +172,10 @@ export default {
         },
         // 直角坐标系内绘图网格
         grid: {
-          left: this.$utils.checkParam(this.options.gridLeft, '3%'),
-          right: this.$utils.checkParam(this.options.gridRight, '3%'),
-          bottom: this.$utils.checkParam(this.options.gridBottom, '3%'),
-          top: this.$utils.checkParam(this.options.gridTop, '3%'),
+          left: gridLeft,
+          right: gridRight,
+          bottom: gridBottom,
+          top: gridTop,
           containLabel: true
         },
         xAxis: {
@@ -139,30 +183,30 @@ export default {
         },
         yAxis: [
           {
-            show: !this.options.hideyAxis,
+            show: !hideyAxis,
             inverse: true,
-            data: this.options.name,
+            data: name,
             // 坐标轴轴线
             axisLine: {
-              show: this.options.hideyAxisLine === undefined ? true : !this.options.hideyAxisLine,
+              show: !hideyAxisLine,
               lineStyle: {
-                color: this.options.yAxisColor || this.textColor
+                color: yAxisColor
               }
             },
             // 坐标轴刻度
             axisTick: {
-              show: this.options.hideyAxisTick === undefined ? true : !this.options.hideyAxisTick,
+              show: !hideyAxisTick,
               alignWithLabel: true
             },
             // 坐标轴刻度标签
             axisLabel: {
-              fontSize: this.options.yAxisFontSize || 12,
-              color: this.options.yAxisColor || this.textColor,
+              fontSize: yAxisFontSize,
+              color: yAxisColor,
               // 坐标轴刻度标签的显示间隔，在类目轴中有效。可以设置成 0 强制显示所有标签。
               interval: 0,
               formatter(value) {
                 let ret = '' // 拼接加\n返回的类目项
-                let maxLength = that.options.yAxisMaxLength || 8 // 每项显示文字个数
+                let maxLength = yAxisMaxLength // 每项显示文字个数
                 let valLength = value.length // X轴类目项的文字个数
                 let rowN = Math.ceil(valLength / maxLength) // 类目项需要换行的行数
                 if (rowN > 1) {
@@ -183,25 +227,25 @@ export default {
             }
           },
           {
-            show: !this.options.hideyAxisLabel,
+            show: !hideyAxisLabel,
             inverse: true,
-            data: this.options.yAxisLabel,
+            data: yAxisLabel,
             // 坐标轴轴线
             axisLine: {
-              show: this.options.hideyAxisLine === undefined ? true : !this.options.hideyAxisLine,
+              show: !hideyAxisLine,
               lineStyle: {
-                color: this.options.yAxisColor || this.textColor
+                color: yAxisColor
               }
             },
             // 坐标轴刻度
             axisTick: {
-              show: this.options.hideyAxisTick === undefined ? true : !this.options.hideyAxisTick,
+              show: !hideyAxisTick,
               alignWithLabel: true
             },
             // 坐标轴刻度标签
             axisLabel: {
-              fontSize: this.options.yAxisFontSize || 12,
-              color: this.options.yAxisColor || this.textColor
+              fontSize: yAxisFontSize,
+              color: yAxisColor
             }
           }
         ],
@@ -210,15 +254,14 @@ export default {
             name: '内条',
             type: 'bar',
             barGap: '-100%',
-            data: this.options.inside,
-            barWidth: this.$utils.checkParam(this.options.insideWidth, 25),
+            data: inside,
+            barWidth: insideWidth,
             itemStyle: {
               normal: {
-                barBorderRadius: this.$utils.checkParam(this.options.insideRadius, 25),
+                barBorderRadius: insideRadius,
                 // 添加一个是否渐变
                 color(params) {
-                  if (that.options.isGradient) {
-                    let color = that.options.color || that.baseColors
+                  if (isGradient) {
                     let num = color.length
                     return {
                       colorStops: [
@@ -234,7 +277,6 @@ export default {
                       globalCoord: false // 缺省为 false
                     }
                   } else {
-                    let color = that.options.color || that.baseColor
                     let num = color.length
                     return color[params.dataIndex % num]
                   }
@@ -244,8 +286,8 @@ export default {
             label: {
               normal: {
                 show: true,
-                position: this.options.insidePosition || 'inside',
-                formatter: this.options.insideFormat || '{c}'
+                position: insidePosition,
+                formatter: insideFormat
               }
             },
             z: 2
@@ -254,12 +296,12 @@ export default {
             name: '外条',
             type: 'bar',
             barGap: '-100%',
-            data: this.options.outside,
-            barWidth: this.$utils.checkParam(this.options.outsideWidth, 25),
+            data: outside,
+            barWidth: outsideWidth,
             itemStyle: {
               normal: {
-                barBorderRadius: this.$utils.checkParam(this.options.outsideRadius, 25),
-                color: this.options.outsideBarBack || 'rgba(102, 102, 102, 0.5)'
+                barBorderRadius: outsideRadius,
+                color: outsideBarBack
               }
             },
             z: 1
@@ -288,5 +330,3 @@ export default {
   }
 }
 </script>
-
-<style></style>

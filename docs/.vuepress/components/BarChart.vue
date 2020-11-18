@@ -13,6 +13,7 @@
 
 <script>
 import echarts from 'echarts'
+import { checkParam } from 'utils'
 export default {
   name: 'BarChart',
   props: {
@@ -66,11 +67,12 @@ export default {
       if (!xAxis || !yAxis || !xAxis.length || !yAxis.length) {
         return
       }
-      let that = this
       const {
         text = '',
+        reverse,
         isZoom = reverse ? yAxis && yAxis.length > 10 : xAxis && xAxis.length > 10,
-        color = this.baseColor,
+        isGradient,
+        color = isGradient ? this.baseColors : this.baseColor,
         textColor = this.textColor,
         textFontSize = 18,
         subtext,
@@ -125,8 +127,6 @@ export default {
         labelPosition = 'top',
         labelColor = this.textColor,
         labelFontSize = 12,
-        isGradient,
-        reverse,
         id
       } = this.options
       this.title = text || toolboxName
@@ -151,7 +151,7 @@ export default {
         // 图例
         legend: {
           type: 'scroll', // 只有容器放不下图例, scroll 才会生效
-          show: this.$utils.checkParam(showLegend, legend && legend.length > 1),
+          show: checkParam(showLegend, legend && legend.length > 1),
           data: legend || [text],
           right: !hideTooltip ? 60 : 0,
           top: legendTop,
@@ -374,54 +374,31 @@ export default {
             type: 'bar',
             barMaxWidth: 25,
             data: [...yAxis].reverse(),
-            id: this.$utils.checkParam(id, null),
+            id: checkParam(id, null),
             label: {
               show: showLabel,
               position: labelPosition,
               color: labelColor,
               fontSize: labelFontSize
             },
-            itemStyle: isGradient
-              ? {
-                  normal: {
-                    color(params) {
-                      let index = color
-                        ? params.dataIndex % color.length
-                        : params.dataIndex % that.baseColors.length
-                      return new echarts.graphic.LinearGradient(1, 0, 0, 0, [
-                        {
-                          offset: 0,
-                          color: color ? color[index][0] : that.baseColors[index][0]
-                        },
-                        {
-                          offset: 1,
-                          color: color ? color[index][1] : that.baseColors[index][1]
-                        }
-                      ])
+            itemStyle: {
+              normal: {
+                color(params) {
+                  let index = params.dataIndex % color.length
+                  return new echarts.graphic.LinearGradient(1, 0, 0, 0, [
+                    {
+                      offset: 0,
+                      color: isGradient ? color[index][0] : color[index]
                     },
-                    barBorderRadius: 40
-                  }
-                }
-              : {
-                  normal: {
-                    color(params) {
-                      let index = color
-                        ? params.dataIndex % color.length
-                        : params.dataIndex % that.baseColors.length
-                      return new echarts.graphic.LinearGradient(1, 0, 0, 0, [
-                        {
-                          offset: 0,
-                          color: color ? color[index] : that.baseColor[index]
-                        },
-                        {
-                          offset: 1,
-                          color: color ? color[index] : that.baseColor[index]
-                        }
-                      ])
-                    },
-                    barBorderRadius: 40
-                  }
-                }
+                    {
+                      offset: 1,
+                      color: isGradient ? color[index][1] : color[index]
+                    }
+                  ])
+                },
+                barBorderRadius: 40
+              }
+            }
           }
         ]
         // 开启缩放

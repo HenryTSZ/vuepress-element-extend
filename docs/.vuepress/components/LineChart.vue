@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import {checkParam} from 'utils'
 export default {
   name: 'LineChart',
   props: {
@@ -140,7 +141,7 @@ export default {
         // 图例
         legend: {
           type: 'scroll', // 只有容器放不下图例, scroll 才会生效
-          show: this.$utils.checkParam(showLegend, legend && legend.length > 1),
+          show: checkParam(showLegend, legend && legend.length > 1),
           data: legend || [text],
           right: !hideTooltip ? 50 : 20,
           top: legendTop,
@@ -299,14 +300,14 @@ export default {
             // 文字在圆圈中显示
             label: {
               normal: {
-                show: this.$utils.checkParam(showLabel, isZoom),
+                show: checkParam(showLabel, isZoom),
                 fontSize: labelFontSize,
                 fontWeight: labelFontWeight,
                 formatter: labelFormat,
                 offset: labelOffset
               }
             },
-            symbolSize: this.$utils.checkParam(symbolSize, isZoom ? 30 : 5),
+            symbolSize: checkParam(symbolSize, isZoom ? 30 : 5),
             // 气球显示
             markPoint: {
               data: markData

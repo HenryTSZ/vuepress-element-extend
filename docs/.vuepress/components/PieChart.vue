@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { checkParam } from 'utils'
 export default {
   name: 'PieChart',
   props: {
@@ -98,7 +99,7 @@ export default {
         },
         // 图例
         legend: {
-          show: this.$utils.checkParam(showLegend, legend && legend.length > 1),
+          show: checkParam(showLegend, legend && legend.length > 1),
           data: legend,
           orient: legendOrient,
           left: legendLeft,
@@ -183,5 +184,3 @@ export default {
   }
 }
 </script>
-
-<style></style>

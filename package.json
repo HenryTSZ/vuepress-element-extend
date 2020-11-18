@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve": "vuepress dev docs --no-cache --debug",
+    "serve": "vuepress dev docs --no-cache",
     "build": "vuepress build docs"
   },
   "keywords": [],

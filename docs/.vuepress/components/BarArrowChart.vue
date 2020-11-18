@@ -35,13 +35,14 @@ export default {
   computed: {},
   watch: {
     options: {
-      handler: function() {
+      handler() {
         this.arrow = false
         this.prev = false
         this.next = false
         this.num = 0
-        this.space = this.options.space || this.space
-        if (this.options.xAxis) {
+        const { space, xAxis } = this.options
+        this.space = space || this.space
+        if (xAxis) {
           this.nextData()
         } else {
           this.data = {}
