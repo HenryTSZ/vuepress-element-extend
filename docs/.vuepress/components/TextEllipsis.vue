@@ -38,7 +38,7 @@ export default {
   methods: {
     handleMouseEnter({ target }) {
       const { scrollHeight, clientHeight } = target
-      this.disabled = scrollHeight - clientHeight + 0.01 <= clientHeight
+      this.disabled = scrollHeight - clientHeight < clientHeight / this.lineClamp
     }
   }
 }
