@@ -41,9 +41,9 @@
   }
 </script>
 
-<style scope>
-  .text-ellipsis {
-    margin-bottom: 20px;
+<style>
+  .text-ellipsis + .text-ellipsis {
+    margin-top: 20px;
   }
 </style>
 ```
@@ -52,7 +52,7 @@
 
 ## 高级扩展
 
-:::demo 支持 [ElementUI-Tooltip](https://element.eleme.cn/#/zh-CN/component/tooltip) 属性
+:::demo 支持 [ElementUI-Tooltip](https://element.eleme.cn/#/zh-CN/component/tooltip) 属性; line-clamp: 文本行数, 默认为 1
 
 ```html
 <template>
@@ -61,7 +61,7 @@
     :key="text"
     :content="text"
     effect="light"
-    :open-delay="500"
+    line-clamp="3"
   ></text-ellipsis>
 </template>
 
@@ -87,9 +87,9 @@
   }
 </script>
 
-<style scope>
-  .text-ellipsis {
-    margin-bottom: 20px;
+<style>
+  .text-ellipsis + .text-ellipsis {
+    margin-top: 20px;
   }
 </style>
 ```
@@ -98,19 +98,20 @@
 
 ## Attributes
 
-| 参数            | 说明                                                                                                    | 类型    | 可选值                                                                                                    | 默认值                                                |
-| --------------- | ------------------------------------------------------------------------------------------------------- | ------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| content         | 显示的内容, 仅支持简单的文本                                                                            | string  | —                                                                                                         | —                                                     |
-| effect          | 默认提供的主题                                                                                          | string  | dark/light                                                                                                | dark                                                  |
-| placement       | Tooltip 的出现位置                                                                                      | string  | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end | bottom                                                |
-| value / v-model | 状态是否可见                                                                                            | boolean | —                                                                                                         | false                                                 |
-| offset          | 出现位置的偏移量                                                                                        | number  | —                                                                                                         | 0                                                     |
-| transition      | 定义渐变动画                                                                                            | string  | —                                                                                                         | el-fade-in-linear                                     |
-| visible-arrow   | 是否显示 Tooltip 箭头，更多参数可见[Vue-popper](https://github.com/element-component/vue-popper)        | boolean | —                                                                                                         | true                                                  |
-| popper-options  | [popper.js](https://popper.js.org/documentation.html) 的参数                                            | object  | 参考 [popper.js](https://popper.js.org/documentation.html) 文档                                           | { boundariesElement: 'body', gpuAcceleration: false } |
-| open-delay      | 延迟出现，单位毫秒                                                                                      | number  | —                                                                                                         | 0                                                     |
-| manual          | 手动控制模式，设置为 true 后，mouseenter 和 mouseleave 事件将不会生效                                   | boolean | —                                                                                                         | false                                                 |
-| popper-class    | 为 Tooltip 的 popper 添加类名                                                                           | string  | —                                                                                                         | —                                                     |
-| enterable       | 鼠标是否可进入到 tooltip 中                                                                             | boolean | —                                                                                                         | true                                                  |
-| hide-after      | Tooltip 出现后自动隐藏延时，单位毫秒，为 0 则不会自动隐藏                                               | number  | —                                                                                                         | 0                                                     |
-| tabindex        | Tooltip 组件的 [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) | number  | —                                                                                                         | 0                                                     |
+| 参数            | 说明                                                                                                    | 类型            | 可选值                                                                                                    | 默认值                                                |
+| --------------- | ------------------------------------------------------------------------------------------------------- | --------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| content         | 显示的内容, 仅支持简单的文本                                                                            | string          | —                                                                                                         | —                                                     |
+| line-clamp      | 显示的文本行数                                                                                          | string, number | —                                                                                                         | 1                                                     |
+| effect          | 默认提供的主题                                                                                          | string          | dark/light                                                                                                | dark                                                  |
+| placement       | Tooltip 的出现位置                                                                                      | string          | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end | bottom                                                |
+| value / v-model | 状态是否可见                                                                                            | boolean         | —                                                                                                         | false                                                 |
+| offset          | 出现位置的偏移量                                                                                        | number          | —                                                                                                         | 0                                                     |
+| transition      | 定义渐变动画                                                                                            | string          | —                                                                                                         | el-fade-in-linear                                     |
+| visible-arrow   | 是否显示 Tooltip 箭头，更多参数可见[Vue-popper](https://github.com/element-component/vue-popper)        | boolean         | —                                                                                                         | true                                                  |
+| popper-options  | [popper.js](https://popper.js.org/documentation.html) 的参数                                            | object          | 参考 [popper.js](https://popper.js.org/documentation.html) 文档                                           | { boundariesElement: 'body', gpuAcceleration: false } |
+| open-delay      | 延迟出现，单位毫秒                                                                                      | number          | —                                                                                                         | 0                                                     |
+| manual          | 手动控制模式，设置为 true 后，mouseenter 和 mouseleave 事件将不会生效                                   | boolean         | —                                                                                                         | false                                                 |
+| popper-class    | 为 Tooltip 的 popper 添加类名                                                                           | string          | —                                                                                                         | —                                                     |
+| enterable       | 鼠标是否可进入到 tooltip 中                                                                             | boolean         | —                                                                                                         | true                                                  |
+| hide-after      | Tooltip 出现后自动隐藏延时，单位毫秒，为 0 则不会自动隐藏                                               | number          | —                                                                                                         | 0                                                     |
+| tabindex        | Tooltip 组件的 [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) | number          | —                                                                                                         | 0                                                     |

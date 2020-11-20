@@ -1,6 +1,12 @@
 <template>
-  <el-tooltip class="text-ellipsis" v-bind="$attrs" :disabled="disabled" :content="content">
-    <div @mouseenter.stop="handleMouseEnter">
+  <el-tooltip
+    class="text-ellipsis"
+    v-bind="$attrs"
+    :disabled="disabled"
+    :content="content"
+    :open-delay="openDelay"
+  >
+    <div :style="{ '-webkit-line-clamp': lineClamp }" @mouseenter.stop="handleMouseEnter">
       {{ content }}
     </div>
   </el-tooltip>
@@ -14,6 +20,14 @@ export default {
     content: {
       type: String,
       default: ''
+    },
+    lineClamp: {
+      type: [Number, String],
+      default: 1
+    },
+    openDelay: {
+      type: Number,
+      default: 500
     }
   },
   data() {
@@ -22,9 +36,9 @@ export default {
     }
   },
   methods: {
-    handleMouseEnter(e) {
-      const { scrollWidth, offsetWidth } = e.target
-      this.disabled = scrollWidth <= offsetWidth
+    handleMouseEnter({ target }) {
+      const { scrollHeight, clientHeight } = target
+      this.disabled = scrollHeight - clientHeight + 0.01 <= clientHeight
     }
   }
 }
@@ -35,9 +49,10 @@ export default {
   outline: none;
 }
 .text-ellipsis {
+  display: -webkit-box;
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  -webkit-box-orient: vertical;
 }
 </style>
