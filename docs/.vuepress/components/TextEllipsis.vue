@@ -6,8 +6,14 @@
     :content="content"
     :open-delay="openDelay"
   >
-    <div :style="{ '-webkit-line-clamp': lineClamp }" @mouseenter.stop="handleMouseEnter">
-      {{ content }}
+    <div>
+      <div
+        class="text-ellipsis-content"
+        :style="{ '-webkit-line-clamp': lineClamp }"
+        @mouseenter.stop="handleMouseEnter"
+      >
+        {{ content }}
+      </div>
     </div>
   </el-tooltip>
 </template>
@@ -49,10 +55,14 @@ export default {
   outline: none;
 }
 .text-ellipsis {
-  display: -webkit-box;
   width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-box-orient: vertical;
+  &-content {
+    display: -webkit-box;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-box-orient: vertical;
+  }
 }
 </style>
