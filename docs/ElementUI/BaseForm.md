@@ -158,6 +158,7 @@
           decimal: '',
           select: '',
           selectTree: '',
+          selectTreeMultiple: [],
           info: '只展示, 不可编辑',
           datePicker: '',
           switch: '',
@@ -198,9 +199,19 @@
             component: 'select-tree',
             treeProps: {
               data: selectTreeOptions
-            },
-            rules: [{ required: true, message: '请选择kk树形选择器', trigger: ['blur', 'change'] }]
+            }
           },
+          // {
+          //   label: '多选树形选择器',
+          //   prop: 'selectTreeMultiple',
+          //   type: 'select',
+          //   component: 'select-tree',
+          //   multiple: true,
+          //   treeProps: {
+          //     data: selectTreeOptions
+          //   },
+          //   rules: [{required: true, type: 'array', trigger: 'change'}]
+          // },
           { label: '不可编辑', prop: 'info', type: 'info', component: 'span', noRequired: true },
           { label: '日期选择器', prop: 'datePicker', type: 'date', component: 'el-date-picker' },
           { label: '开关', prop: 'switch', type: 'switch', component: 'el-switch' },

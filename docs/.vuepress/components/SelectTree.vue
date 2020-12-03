@@ -62,6 +62,7 @@ export default {
   },
   data() {
     return {
+      isFirst: true,
       treeKey: Math.random(),
       selectData: '',
       selectOptions: [],
@@ -86,8 +87,10 @@ export default {
   },
   watch: {
     value() {
+      console.log(this.value, 'value')
       // 为了检测 v-model 的变化
       if (this.value + '' !== this.selectData + '') {
+        console.log('value change')
         this.treeKey = Math.random()
         this.init()
       }
@@ -103,6 +106,11 @@ export default {
         }
       })
     },
+    emitBase() {
+      console.log('emitBase')
+      this.$emit('input', this.selectData)
+      this.$emit('change', this.selectData, this.selectNode)
+    },
     // select 下拉框出现/隐藏
     handleVisibleChange(val) {
       // 如果有过滤, 下拉框出现后, 重置搜索
@@ -111,9 +119,10 @@ export default {
       }
       // 下拉框隐藏并且值改变后
       if (!val && this.value + '' !== this.selectData + '') {
-        this.$emit('input', this.selectData)
-        this.$emit('change', this.selectData, this.selectNode)
+        this.emitBase()
+        console.log('emit')
       }
+      console.log('visible', val)
       this.$emit('visible-change', val)
     },
     // select 清空
@@ -127,8 +136,7 @@ export default {
         this.selectNode = null
         this.$refs.tree.setCurrentKey(null)
       }
-      this.$emit('input', this.selectData)
-      this.$emit('change', this.selectData, this.selectNode)
+      this.emitBase()
       this.$emit('clear')
     },
     // select 移除 tag
@@ -143,8 +151,7 @@ export default {
         })
       }
       this.handleCheckChange()
-      this.$emit('input', this.selectData)
-      this.$emit('change', this.selectData, this.selectNode)
+      this.emitBase()
       this.$emit('remove-tag', val)
     },
     // 单选, 节点被点击时的回调, 返回被点击的节点数据
@@ -158,6 +165,12 @@ export default {
       if (!currentNode) {
         this.selectData = ''
         this.selectNode = null
+        if (this.isFirst) {
+          this.isFirst = false
+        } else {
+          this.emitBase()
+          this.$refs.select.blur()
+        }
         return
       }
       const node = this.$refs.tree.getNode(currentNode)
@@ -173,7 +186,13 @@ export default {
       ]
       this.selectData = value
       this.selectNode = node.data
-      this.$refs.select.blur()
+      if (this.isFirst) {
+        this.isFirst = false
+      } else {
+        this.emitBase()
+        console.log('blur')
+        this.$refs.select.blur()
+      }
     },
     // 多选, 节点勾选状态发生变化时的回调
     handleCheckChange() {
@@ -183,6 +202,10 @@ export default {
       const checkedKeys = this.$refs.tree.getCheckedKeys(
         this.treeProps.leafOnly,
         this.treeProps.includeHalfChecked
+      )
+      console.log(
+        '🚀 ~ file: SelectTree.vue ~ line 193 ~ handleCheckChange ~ checkedKeys',
+        checkedKeys
       )
       checkedKeys.forEach(key => {
         const checkedNode = this.$refs.tree.getNode(key)
