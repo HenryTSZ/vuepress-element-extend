@@ -167,31 +167,31 @@
         },
         ref: 'form',
         formItems: [
-          { label: '单行文本', prop: 'text', type: 'text', component: 'el-input' },
-          {
-            label: '前置',
-            prop: 'prepend',
-            type: 'text',
-            component: 'el-input',
-            slots: { prepend: 'http://' }
-          },
-          {
-            label: '后置',
-            prop: 'append',
-            type: 'text',
-            component: 'el-input',
-            slots: { append: '.com' }
-          },
-          { label: '文本域', prop: 'textarea', type: 'textarea', component: 'el-input' },
-          { label: '整数', prop: 'integer', type: 'integer', component: 'number-input' },
-          { label: '小数', prop: 'decimal', type: 'decimal', component: 'number-input' },
-          {
-            label: '选择器',
-            prop: 'select',
-            type: 'select',
-            component: 'el-select',
-            options
-          },
+          // { label: '单行文本', prop: 'text', type: 'text', component: 'el-input' },
+          // {
+          //   label: '前置',
+          //   prop: 'prepend',
+          //   type: 'text',
+          //   component: 'el-input',
+          //   slots: { prepend: 'http://' }
+          // },
+          // {
+          //   label: '后置',
+          //   prop: 'append',
+          //   type: 'text',
+          //   component: 'el-input',
+          //   slots: { append: '.com' }
+          // },
+          // { label: '文本域', prop: 'textarea', type: 'textarea', component: 'el-input' },
+          // { label: '整数', prop: 'integer', type: 'integer', component: 'number-input' },
+          // { label: '小数', prop: 'decimal', type: 'decimal', component: 'number-input' },
+          // {
+          //   label: '选择器',
+          //   prop: 'select',
+          //   type: 'select',
+          //   component: 'el-select',
+          //   options
+          // },
           {
             label: '树形选择器',
             prop: 'selectTree',
@@ -212,23 +212,23 @@
           //   },
           //   rules: [{required: true, type: 'array', trigger: 'change'}]
           // },
-          { label: '不可编辑', prop: 'info', type: 'info', component: 'span', noRequired: true },
-          { label: '日期选择器', prop: 'datePicker', type: 'date', component: 'el-date-picker' },
-          { label: '开关', prop: 'switch', type: 'switch', component: 'el-switch' },
-          {
-            label: '多选框',
-            prop: 'checkbox',
-            type: 'checkbox',
-            component: 'el-checkbox-group',
-            options
-          },
-          {
-            label: '单选框',
-            prop: 'radio',
-            type: 'radio',
-            component: 'el-radio-group',
-            options
-          }
+          // { label: '不可编辑', prop: 'info', type: 'info', component: 'span', noRequired: true },
+          // { label: '日期选择器', prop: 'datePicker', type: 'date', component: 'el-date-picker' },
+          // { label: '开关', prop: 'switch', type: 'switch', component: 'el-switch' },
+          // {
+          //   label: '多选框',
+          //   prop: 'checkbox',
+          //   type: 'checkbox',
+          //   component: 'el-checkbox-group',
+          //   options
+          // },
+          // {
+          //   label: '单选框',
+          //   prop: 'radio',
+          //   type: 'radio',
+          //   component: 'el-radio-group',
+          //   options
+          // }
         ]
       }
     },

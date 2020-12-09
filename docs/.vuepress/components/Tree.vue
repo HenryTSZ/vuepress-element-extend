@@ -285,6 +285,7 @@ export default {
         this[key] = this.$refs[this.ref][key].bind(this.$refs[this.ref])
       }
     }
+    this.$emit('ready')
   }
 }
 </script>

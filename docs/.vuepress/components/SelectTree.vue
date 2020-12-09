@@ -22,6 +22,7 @@
         v-bind="treeBind"
         @current-change="handleCurrentChange"
         @check-change="handleCheckChange"
+        @ready="init"
       ></tree>
     </el-select>
   </div>
@@ -92,19 +93,16 @@ export default {
       if (this.value + '' !== this.selectData + '') {
         console.log('value change')
         this.treeKey = Math.random()
-        this.init()
       }
     }
   },
   methods: {
     init() {
-      this.$nextTick(() => {
-        if (this.isMultiple) {
-          this.handleCheckChange()
-        } else {
-          this.handleCurrentChange()
-        }
-      })
+      if (this.isMultiple) {
+        this.handleCheckChange()
+      } else {
+        this.handleCurrentChange()
+      }
     },
     emitBase() {
       console.log('emitBase')
@@ -160,6 +158,7 @@ export default {
       if (this.isMultiple) return
       // 给 selectOptions 一个默认值, 防止出现无数据, 从而无法显示 tree
       this.selectOptions = [{}]
+      console.log('current change')
       const currentNode = this.$refs.tree.getCurrentNode()
       // 当前传入的值在 tree 中无法找到, 需要清空 select 值
       if (!currentNode) {
@@ -240,7 +239,6 @@ export default {
     }
   },
   mounted() {
-    this.init()
     // 绑定 el-select 方法
     for (let key in this.$refs.select) {
       if (!(key in this) && typeof this.$refs.select[key] === 'function') {
