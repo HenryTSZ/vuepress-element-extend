@@ -67,7 +67,8 @@ export default {
       treeKey: Math.random(),
       selectData: '',
       selectOptions: [],
-      selectNode: null
+      selectNode: null,
+      multipleTempValue: []
     }
   },
   computed: {
@@ -111,14 +112,18 @@ export default {
     },
     // select 下拉框出现/隐藏
     handleVisibleChange(val) {
+      // 下拉框出现并且是多选, 将 this.value 保存到变量 multipleTempValue
+      if (val && this.multiple) {
+        this.multipleTempValue = this.value
+      }
       // 如果有过滤, 下拉框出现后, 重置搜索
       if (val && this.filterable) {
         this.filter()
       }
-      // 下拉框隐藏并且值改变后
-      if (!val && this.value + '' !== this.selectData + '') {
-        this.emitBase()
-        console.log('emit')
+      // 下拉框隐藏并且是多选, 判断值是否变化
+      if (!val && this.multiple && this.value + '' !== this.multipleTempValue + '') {
+        console.log('emit multiple change')
+        this.$emit('change', this.selectData, this.selectNode)
       }
       console.log('visible', val)
       this.$emit('visible-change', val)
@@ -202,10 +207,6 @@ export default {
         this.treeProps.leafOnly,
         this.treeProps.includeHalfChecked
       )
-      console.log(
-        '🚀 ~ file: SelectTree.vue ~ line 193 ~ handleCheckChange ~ checkedKeys',
-        checkedKeys
-      )
       checkedKeys.forEach(key => {
         const checkedNode = this.$refs.tree.getNode(key)
         const value = checkedNode.key
@@ -216,6 +217,11 @@ export default {
         this.selectData.push(value)
         this.selectNode.push(checkedNode.data)
       })
+      if (this.isFirst) {
+        this.isFirst = false
+      } else {
+        this.$emit('input', this.selectData)
+      }
     },
     tree2List(tree) {
       let queen = []
