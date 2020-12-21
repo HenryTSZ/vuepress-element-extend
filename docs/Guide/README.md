@@ -2,7 +2,7 @@
 
 本项目是基于 [vuepress-plugin-demo-container](https://github.com/calebman/vuepress-plugin-demo-container) 插件二次封装的, 感谢 `calebman` 大大提供这么好用的插件
 
-具体封装过程请看: [基于 VuePress 搭建一个类似 ElementUI 的说明文档 | Henry](https://tsz.now.sh/2020/08/29/based-VuePress-building-a-similar-ElementUi-document/)
+具体封装过程请看: [基于 VuePress 搭建一个类似 ElementUI 的说明文档 | Henry](https://tszv.now.sh/pages/d8afb7/)
 
 ## 更新
 
