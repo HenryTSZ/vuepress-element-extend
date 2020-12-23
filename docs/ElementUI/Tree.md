@@ -107,14 +107,30 @@
 :::demo `show-check-all` (需配合 `show-checkbox` ), `Boolean` ; 必须设置 `node-key` , 默认值为 `id` ; 配合 `disabled` 可能有问题, 请谨慎使用
 
 ```html
-<tree
-  :data="data"
-  :props="defaultProps"
-  show-checkbox
-  show-check-all
-  @check="handleCheck"
-  @check-change="handleCheckChange"
-></tree>
+<el-row :gutter="20" class="demo-row">
+  <el-col :span="12">
+    <p class="label">无 disabled</p>
+    <tree
+      :data="data"
+      :props="defaultProps"
+      show-checkbox
+      show-check-all
+      @check="handleCheck"
+      @check-change="handleCheckChange"
+    ></tree>
+  </el-col>
+  <el-col :span="12">
+    <p class="label">有 disabled</p>
+    <tree
+      :data="data"
+      :props="disabledProps"
+      show-checkbox
+      show-check-all
+      @check="handleCheck"
+      @check-change="handleCheckChange"
+    ></tree>
+  </el-col>
+</el-row>
 
 <script>
   export default {
@@ -128,7 +144,6 @@
               {
                 label: '二级 1-1',
                 id: '1-1',
-                disabled: true,
                 children: [
                   {
                     label: '三级 1-1-1',
@@ -184,7 +199,6 @@
                 children: [
                   {
                     label: '三级 3-2-1',
-                    disabled: true,
                     id: '3-2-1'
                   }
                 ]
@@ -195,6 +209,11 @@
         defaultProps: {
           children: 'children',
           label: 'label'
+        },
+        disabledProps: {
+          disabled(data) {
+            return ['二级 2-1', '三级 3-2-1'].includes(data.label)
+          }
         }
       }
     },
