@@ -493,18 +493,31 @@
 :::demo 通过传入 `current-node-key` 和 `default-checked-keys` 设置默认选中, 必须传入 `row-key` , 默认为 `id` . 此例同时展示了通过 `slot` 来传入列, 默认在 `columns` 后面, 通过具名 `prev` 可以设置到 `columns` 前面
 
 ```html
+<el-button-group>
+  <el-button @click="setCurrent">设置选中</el-button>
+  <el-button @click="clearCurrent">清空选中</el-button>
+</el-button-group>
 <p class="tc">单选</p>
 <base-table
   :data="data"
   :columns="columns"
   highlight-current-row
   row-key="age"
-  :current-node-key="18"
+  :current-node-key="currentNodeKey"
 >
   <el-table-column type="index" width="50" label="序号"></el-table-column>
 </base-table>
+<el-button-group style="margin-top: 10px">
+  <el-button @click="setChecked">设置勾选</el-button>
+  <el-button @click="clearChecked">清空勾选</el-button>
+</el-button-group>
 <p class="tc">多选</p>
-<base-table :data="data" :columns="columns" row-key="age" :default-checked-keys="[17, 19]">
+<base-table
+  :data="data"
+  :columns="columns"
+  row-key="age"
+  :default-checked-keys="defaultCheckedKeys"
+>
   <el-table-column slot="prev" type="selection" width="55"></el-table-column>
 </base-table>
 
@@ -589,7 +602,23 @@
               return findVal(addressMap, row.address)
             }
           }
-        ]
+        ],
+        defaultCheckedKeys: [17, 19],
+        currentNodeKey: 18
+      }
+    },
+    methods: {
+      setChecked() {
+        this.defaultCheckedKeys = [17, 19]
+      },
+      setCurrent() {
+        this.currentNodeKey = 18
+      },
+      clearChecked() {
+        this.defaultCheckedKeys = 'clear'
+      },
+      clearCurrent() {
+        this.currentNodeKey = 'clear'
       }
     }
   }
@@ -607,8 +636,8 @@
 | props                   | 统一配置 `columns` 的 `prop` 及 `label`                                                                                                                                                                       | object                                                | —                               | `{ prop: 'prop', label: 'label' }`                              |
 | focus-row               | 自动聚焦行                                                                                                                                                                                                    | number                                                | —                               | 0                                                               |
 | focus-col               | 自动聚焦列                                                                                                                                                                                                    | number                                                | —                               | 0                                                               |
-| current-node-key        | 当前选中的节点, 必须设置 `row-key`                                                                                                                                                                            | string, number                                        | —                               | —                                                               |
-| default-checked-keys    | 默认勾选的节点的 `key` 的数组, 必须设置 `row-key`                                                                                                                                                             | array                                                 | —                               | —                                                               |
+| current-node-key        | 当前选中的节点, 必须设置 `row-key`; 或者为 `clear`, 清空选中                                                                                                                                                  | string, number                                        | —                               | —                                                               |
+| default-checked-keys    | 默认勾选的节点的 `key` 的数组, 必须设置 `row-key`; 或者为 `clear`, 清空选中                                                                                                                                   | array, string                                         | —                               | —                                                               |
 | height                  | Table 的高度, 默认为自动高度. 如果 height 为 number 类型, 单位 px; 如果 height 为 string 类型, 则这个高度会设置为 Table 的 style.height 的值, Table 的高度会受控于外部样式.                                   | string/number                                         | —                               | —                                                               |
 | max-height              | Table 的最大高度. 合法的值为数字或者单位为 px 的高度.                                                                                                                                                         | string/number                                         | —                               | —                                                               |
 | stripe                  | 是否为斑马纹 table                                                                                                                                                                                            | boolean                                               | —                               | false                                                           |
