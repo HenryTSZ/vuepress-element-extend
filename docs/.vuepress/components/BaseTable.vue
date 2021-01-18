@@ -66,7 +66,8 @@ export default {
       default: 'id'
     },
     defaultCheckedKeys: {
-      type: Array,
+      // String 只可能是 clear, 作用为清空
+      type: [Array, String],
       default() {
         return []
       }
@@ -123,6 +124,10 @@ export default {
     setDefaultCheckedKeys() {
       this.$nextTick(() => {
         if (!this.$refs[this.ref]) return
+        if (this.defaultCheckedKeys === 'clear') {
+          this.$refs[this.ref].clearSelection()
+          return
+        }
         if (this.defaultCheckedKeys.length) {
           const rows = this.data.filter(item => this.defaultCheckedKeys.includes(item[this.rowKey]))
           rows.forEach(row => {
@@ -134,6 +139,10 @@ export default {
     setCurrentNodeKey() {
       this.$nextTick(() => {
         if (!this.$refs[this.ref]) return
+        if (this.currentNodeKey === 'clear') {
+          this.$refs[this.ref].setCurrentRow(null)
+          return
+        }
         if (this.currentNodeKey) {
           const row = this.data.find(item => this.currentNodeKey === item[this.rowKey])
           if (row) {

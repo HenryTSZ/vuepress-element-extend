@@ -66,7 +66,8 @@ export default {
       default: 'id'
     },
     defaultCheckedKeys: {
-      type: Array,
+      // String 只可能是 clear, 作用为清空
+      type: [Array, String],
       default() {
         return []
       }
@@ -184,6 +185,10 @@ export default {
     // 设置默认选中
     async setDefaultCheckedKeys() {
       if (!this.$refs[this.ref]) return
+      if (this.defaultCheckedKeys === 'clear') {
+        this.$refs[this.ref].clearSelection()
+        return
+      }
       if (!this.children) {
         await this.handleData()
       }
@@ -228,6 +233,10 @@ export default {
     },
     async setCurrentNodeKey() {
       if (!this.$refs[this.ref]) return
+      if (this.currentNodeKey === 'clear') {
+        this.$refs[this.ref].setCurrentRow(null)
+        return
+      }
       if (!this.children) {
         await this.handleData()
       }
