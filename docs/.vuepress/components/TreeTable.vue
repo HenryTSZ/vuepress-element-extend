@@ -136,8 +136,8 @@ export default {
       async handler() {
         await this.handleData()
         this.setDefaultCheckedKeys()
-        this.refreshLayout()
         this.setCurrentNodeKey()
+        this.refreshLayout()
       },
       deep: true,
       immediate: true
