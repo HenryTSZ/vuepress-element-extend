@@ -330,6 +330,96 @@
 
 :::
 
+## 设置 selectable 的选择
+
+当设置 `selectable` 后, 如果子级 `CheckBox` 不可勾选, 选中父级后, 子级仍是不可选并且未选中的状态
+
+::: demo 由于处理子级时的 `index` 是该子级在父级下的 `index`, 而不是在表格的 `$index`, 故设置 `selectable` 时只能使用第一个参数: `row`, 而无法使用第二个参数: `index`
+
+```html
+<tree-table :data="data" :columns="columns" default-expand-all> </tree-table>
+
+<script>
+  export default {
+    data() {
+      return {
+        data: [
+          {
+            id: 1,
+            date: '2016-05-02',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+          },
+          {
+            id: 2,
+            date: '2016-05-04',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1517 弄'
+          },
+          {
+            id: 3,
+            date: '2016-05-01',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1519 弄',
+            children: [
+              {
+                id: 31,
+                date: '2016-05-01',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1519 弄'
+              },
+              {
+                id: 32,
+                date: '2016-05-01',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1519 弄',
+                children: [
+                  {
+                    id: 321,
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1519 弄'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: 4,
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          }
+        ],
+        columns: [
+          {
+            type: 'selection',
+            selectable(row) {
+              return row.id !== 32
+            }
+          },
+          {
+            label: '名字',
+            prop: 'name'
+          },
+          {
+            label: '日期',
+            prop: 'date'
+          },
+          {
+            label: '住址',
+            prop: 'address',
+            width: '300px'
+          }
+        ]
+      }
+    }
+  }
+</script>
+```
+
+:::
+
 ## Attributes
 
 | 参数                    | 说明                                                                                                                                                                                                          | 类型                                                  | 可选值                          | 默认值                                                          |
@@ -344,7 +434,7 @@
 | focus-row               | 自动聚焦行                                                                                                                                                                                                    | number                                                | —                               | 0                                                               |
 | focus-col               | 自动聚焦列                                                                                                                                                                                                    | number                                                | —                               | 0                                                               |
 | current-node-key        | 当前选中的节点, 必须设置 `row-key`; 或者为 `clear`, 清空选中                                                                                                                                                  | string, number                                        | —                               | —                                                               |
-| default-checked-keys    | 默认勾选的节点的 `key` 的数组, 必须设置 `row-key`; 或者为 `clear`, 清空选中                                                                                                                                   | array, string                                                 | —                               | —                                                               |
+| default-checked-keys    | 默认勾选的节点的 `key` 的数组, 必须设置 `row-key`; 或者为 `clear`, 清空选中                                                                                                                                   | array, string                                         | —                               | —                                                               |
 | height                  | Table 的高度, 默认为自动高度. 如果 height 为 number 类型, 单位 px; 如果 height 为 string 类型, 则这个高度会设置为 Table 的 style.height 的值, Table 的高度会受控于外部样式.                                   | string/number                                         | —                               | —                                                               |
 | max-height              | Table 的最大高度. 合法的值为数字或者单位为 px 的高度.                                                                                                                                                         | string/number                                         | —                               | —                                                               |
 | stripe                  | 是否为斑马纹 table                                                                                                                                                                                            | boolean                                               | —                               | false                                                           |

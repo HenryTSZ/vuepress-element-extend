@@ -107,6 +107,7 @@ export default {
       maxLevel: 0,
       treeData: {},
       children: '',
+      selectable: false,
       timeout: null
     }
   },
@@ -169,7 +170,9 @@ export default {
     handleData() {
       this.$nextTick(() => {
         if (!this.$refs[this.ref]) return
-        this.treeData = this.$refs[this.ref].store.states.treeData
+        const { treeData, selectable } = this.$refs[this.ref].store.states
+        this.treeData = treeData
+        this.selectable = selectable
         const levels = Object.values(this.treeData).map(({ level }) => level)
         if (levels.length) {
           this.maxLevel = Math.max.apply(null, levels) + 2
@@ -307,7 +310,8 @@ export default {
     selectChildren(row, selected, selection) {
       if (row[this.children] && Array.isArray(row[this.children])) {
         row[this.children].forEach(item => {
-          this.toggleSelection(item, selected)
+          const selectable = this.selectable ? this.selectable(item) : true
+          selectable && this.toggleSelection(item, selected)
           if (selection) {
             if (selected && !selection.includes(item)) {
               selection = selection.concat(item)
