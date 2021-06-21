@@ -287,15 +287,19 @@ export default {
       if (this.checkAll) {
         // tableData 第一层只要有在 selection 里面就是全选
         const isSelect = this.data.some(item => selection.includes(item))
-        if (isSelect) {
-          selection.forEach(item => {
-            this.selectChildren(item, isSelect)
-          })
-        } else {
-          this.data.forEach(item => {
-            this.selectChildren(item, isSelect)
-          })
-        }
+        // if (isSelect) {
+        //   selection.forEach(item => {
+        //     this.selectChildren(item, isSelect)
+        //   })
+        // } else {
+        //   this.data.forEach(item => {
+        //     this.selectChildren(item, isSelect)
+        //   })
+        // }
+        // 解决父不可勾选时, 全选时子也不会勾选
+        this.data.forEach(item => {
+          this.selectChildren(item, isSelect)
+        })
       }
       this.$nextTick(() => {
         this.$emit('select-all', selection)
