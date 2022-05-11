@@ -7,8 +7,8 @@ function resolve(dir) {
 const demoBlock = require('./plugins/demo-block')
 
 module.exports = {
-  title: 'VuePress-ElementUI-Template',
-  description: 'Based on the VuePress and ElementUI documentation',
+  title: 'VuePress-auguigu',
+  description: 'Based on the VuePress a auguigu documentation',
   head: [['link', { rel: 'icon', href: '/logo.png' }]],
   alias: {
     public: resolve('public'),
@@ -36,11 +36,11 @@ module.exports = {
       ]
     },
     sidebarDepth: 2,
-    repo: 'HenryTSZ/vuepress-element-extend/tree/template',
+    repo: 'HenryTSZ/vuepress-element-extend/tree/auguigu',
     repoLabel: 'GitHub',
     docsRepo: 'HenryTSZ/vuepress-element-extend/',
     docsDir: 'docs',
-    docsBranch: 'template',
+    docsBranch: 'auguigu',
     editLinks: true,
     editLinkText: '在 GitHub 上编辑此页',
     lastUpdated: '最近更新时间'

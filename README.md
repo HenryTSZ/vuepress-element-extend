@@ -1,18 +1,11 @@
-# 基于 `VuePress` 搭建一个类似 `ElementUI` 的说明文档
+本文所有案例来自 B 站课程[《尚硅谷 Vue2.0+Vue3.0 全套教程丨 vuejs 从入门到精通》](https://www.bilibili.com/video/BV1Zy4y1K7SH)
 
-## Project setup
-```
-npm install
-```
+案例仅供学习 + 查阅知识使用，版权归原作者所有，如有侵权请联系站长删除
 
-### Compiles and hot-reloads for development
-```
-npm run dev
-```
+这里有大佬整理的全套笔记
 
-### Compiles and minifies for production
-```
-npm run build
-```
+[Vue 核心 Vue 简介 初识 · 语雀](https://www.yuque.com/cessstudy/kak11d/hfeef2)
 
-搭建过程: [基于 VuePress 搭建一个类似 ElementUI 的说明文档 | Henry](https://tszv.now.sh/pages/d8afb7/)
+[微客鸟窝](https://wekenw.gitee.io/)
+
+故我就不再详细整理了，只记录我认为比较重要的知识

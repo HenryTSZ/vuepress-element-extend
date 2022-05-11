@@ -1,7 +1,7 @@
 {
-  "name": "vuepress-element-extend-template",
+  "name": "vuepress-atguigu",
   "version": "1.0.0",
-  "description": "based-VuePress-building-a-similar-ElementUi-document",
+  "description": "based-VuePress-building-a-atguigu-document",
   "main": "index.js",
   "scripts": {
     "dev": "vuepress dev docs",
