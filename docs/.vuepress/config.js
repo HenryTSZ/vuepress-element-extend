@@ -7,7 +7,7 @@ function resolve(dir) {
 const demoBlock = require('./plugins/demo-block')
 
 module.exports = {
-  title: 'VuePress-auguigu',
+  title: 'auguigu',
   description: 'Based on the VuePress a auguigu documentation',
   head: [['link', { rel: 'icon', href: '/logo.png' }]],
   alias: {
@@ -20,18 +20,18 @@ module.exports = {
     }
   },
   themeConfig: {
-    logo: '/logo.png',
+    logo: '/logo-2.png',
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Guide', link: '/Guide/' },
+      { text: 'vue2+3', link: '/8f9f1a/' },
       { text: 'VuePress', link: 'https://vuepress.vuejs.org/zh/' }
     ],
     sidebar: {
-      '/Guide/': [
+      '/vue2+3/': [
         {
-          title: '指南',
+          title: '尚硅谷 Vue2.0+Vue3.0 全套教程',
           collapsable: false,
-          children: ['', 'started', 'options', 'Radio']
+          children: ['001.说明', '002.初识Vue']
         }
       ]
     },
