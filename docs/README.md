@@ -4,7 +4,7 @@ heroImage: /logo.png
 heroText: null
 tagline: 本项目是基于 VuePress 搭建一个类似 ElementUI 的说明文档模版
 actionText: 快速上手 →
-actionLink: /Guide/
+actionLink: /a41cee/
 features:
 - title: VuePress
   details: Vue 驱动的静态网站生成器。享受 Vue + webpack 的开发体验，可以在 Markdown 中使用 Vue 组件，又可以使用 Vue 来开发自定义主题。

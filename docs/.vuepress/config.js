@@ -5,6 +5,7 @@ function resolve(dir) {
 
 // https://github.com/calebman/vuepress-plugin-demo-container
 const demoBlock = require('./plugins/demo-block')
+const theme = require('./theme')
 
 module.exports = {
   title: 'VuePress-ElementUI-Template',
@@ -19,22 +20,16 @@ module.exports = {
       lang: 'zh-CN'
     }
   },
+  theme,
   themeConfig: {
     logo: '/logo.png',
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Guide', link: '/Guide/' },
+      { text: 'Guide', link: '/a41cee/' },
       { text: 'VuePress', link: 'https://vuepress.vuejs.org/zh/' }
     ],
-    sidebar: {
-      '/Guide/': [
-        {
-          title: '指南',
-          collapsable: false,
-          children: ['', 'started', 'options', 'Radio']
-        }
-      ]
-    },
+    // 侧边栏  'structuring' | { mode: 'structuring', collapsable: Boolean } | 'auto' | 自定义    温馨提示：目录页数据依赖于结构化的侧边栏数据，如果你不设置为'structuring',将无法使用目录页
+    sidebar: 'structuring',
     sidebarDepth: 2,
     repo: 'HenryTSZ/vuepress-element-extend/tree/template',
     repoLabel: 'GitHub',
