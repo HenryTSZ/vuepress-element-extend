@@ -5,6 +5,7 @@ function resolve(dir) {
 
 // https://github.com/calebman/vuepress-plugin-demo-container
 const demoBlock = require('./plugins/demo-block')
+const theme = require('./theme')
 
 module.exports = {
   title: 'auguigu',
@@ -19,6 +20,7 @@ module.exports = {
       lang: 'zh-CN'
     }
   },
+  theme,
   themeConfig: {
     logo: '/logo-2.png',
     nav: [
@@ -26,15 +28,8 @@ module.exports = {
       { text: 'vue2+3', link: '/8f9f1a/' },
       { text: 'VuePress', link: 'https://vuepress.vuejs.org/zh/' }
     ],
-    sidebar: {
-      '/vue2+3/': [
-        {
-          title: '尚硅谷 Vue2.0+Vue3.0 全套教程',
-          collapsable: false,
-          children: ['001.说明', '002.初识Vue']
-        }
-      ]
-    },
+    // 侧边栏  'structuring' | { mode: 'structuring', collapsable: Boolean } | 'auto' | 自定义    温馨提示：目录页数据依赖于结构化的侧边栏数据，如果你不设置为'structuring',将无法使用目录页
+    sidebar: 'structuring',
     sidebarDepth: 2,
     repo: 'HenryTSZ/vuepress-element-extend/tree/auguigu',
     repoLabel: 'GitHub',
