@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>初识Vue</title>
-  <!-- 引入Vue -->
+  <!-- 引入 Vue -->
   <script type="text/javascript" src="../js/vue.js"></script>
 </head>
 
@@ -15,12 +15,12 @@
   </div>
 
   <script type="text/javascript">
-    Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
+    Vue.config.productionTip = false // 阻止 vue 在启动时生成生产提示。
 
-    //创建Vue实例
+    // 创建 Vue 实例
     new Vue({
-      el: '#demo', //el用于指定当前Vue实例为哪个容器服务，值通常为css选择器字符串。
-      data: { //data中用于存储数据，数据供el所指定的容器去使用，值我们暂时先写成一个对象。
+      el: '#demo', // el 用于指定当前 Vue 实例为哪个容器服务，值通常为 css 选择器字符串。
+      data: { // data 中用于存储数据，数据供 el 所指定的容器去使用，值我们暂时先写成一个对象。
         name: 'atguigu',
         address: '北京'
       }

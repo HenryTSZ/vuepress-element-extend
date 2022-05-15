@@ -81,7 +81,7 @@ function mapTocToSidebar(root, collapsable, prefix = '') {
       sidebar[order] = {
         title,
         collapsable, // 是否可折叠，默认true
-        children: mapTocToSidebar(file, collapsable, prefix + filename + '/').sidebar // 子栏路径添加前缀
+        children: mapTocToSidebar(file, collapsable, prefix + filename + '/') // 子栏路径添加前缀
       }
     } else {
       // 是文件
