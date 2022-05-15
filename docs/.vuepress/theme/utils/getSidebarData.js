@@ -80,7 +80,7 @@ function mapTocToSidebar(root, collapsable, prefix = '') {
       // 是文件夹目录
       sidebar[order] = {
         title,
-        collapsable, // 是否可折叠，默认true
+        collapsable, // 是否可折叠，默认 true
         children: mapTocToSidebar(file, collapsable, prefix + filename + '/') // 子栏路径添加前缀
       }
     } else {
@@ -89,8 +89,8 @@ function mapTocToSidebar(root, collapsable, prefix = '') {
         log(chalk.yellow(`warning: 该文件 "${file}" 非.md格式文件，不支持该文件类型`))
         return
       }
-      const contentStr = fs.readFileSync(file, 'utf8') // 读取md文件内容，返回字符串
-      const { data } = matter(contentStr) // 解析出front matter数据
+      const contentStr = fs.readFileSync(file, 'utf8') // 读取 md 文件内容，返回字符串
+      const { data } = matter(contentStr) // 解析出 front matter 数据
       const permalink = data.permalink || ''
 
       if (data.title) {

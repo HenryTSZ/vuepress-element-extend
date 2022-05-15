@@ -15,11 +15,11 @@ function setFrontmatter(sourceDir) {
   files.forEach(file => {
     let dataStr = fs.readFileSync(file.filePath, 'utf8') // 读取每个 md 文件内容
 
-    // fileMatterObj => {content:'剔除frontmatter后的文件内容字符串', data:{<frontmatter对象>}, ...}
+    // fileMatterObj => {content:'剔除 frontmatter 后的文件内容字符串', data:{<frontmatter 对象>}, ...}
     const fileMatterObj = matter(dataStr)
 
     if (Object.keys(fileMatterObj.data).length === 0) {
-      // 未定义FrontMatter数据
+      // 未定义 FrontMatter 数据
       const stat = fs.statSync(file.filePath)
       const dateStr = dateFormat(getBirthtime(stat)) // 文件的创建时间
 
@@ -30,13 +30,13 @@ permalink: ${getPermalink()}
 ---`
 
       fs.writeFileSync(file.filePath, `${fmData}\r\n${fileMatterObj.content}`) // 写入
-      log(chalk.blue('tip ') + chalk.green(`write frontmatter(写入frontmatter)：${file.filePath} `))
+      log(chalk.blue('tip ') + chalk.green(`write frontmatter(写入 frontmatter)：${file.filePath} `))
     } else {
-      // 已有FrontMatter
+      // 已有 FrontMatter
       const matterData = fileMatterObj.data
       let mark = false
 
-      // 已有FrontMatter，但是没有title、date、permalink数据的
+      // 已有 FrontMatter，但是没有 title、date、permalink 数据的
       if (!matterData.hasOwnProperty('title')) {
         // 标题
         matterData.title = file.name
@@ -69,7 +69,7 @@ permalink: ${getPermalink()}
           fileMatterObj.content
         fs.writeFileSync(file.filePath, newData) // 写入
         log(
-          chalk.blue('tip ') + chalk.green(`write frontmatter(写入frontmatter)：${file.filePath} `)
+          chalk.blue('tip ') + chalk.green(`write frontmatter(写入 frontmatter)：${file.filePath} `)
         )
       }
     }
@@ -78,7 +78,7 @@ permalink: ${getPermalink()}
 
 // 获取文件创建时间
 function getBirthtime(stat) {
-  // 在一些系统下无法获取birthtime属性的正确时间，使用atime代替
+  // 在一些系统下无法获取 birthtime 属性的正确时间，使用 atime 代替
   return stat.birthtime.getFullYear() != 1970 ? stat.birthtime : stat.atime
 }
 
