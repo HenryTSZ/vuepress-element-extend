@@ -84,7 +84,7 @@ function getBirthtime(stat) {
 
 // 定义永久链接数据
 function getPermalink() {
-  return (Math.random() + Math.random()).toString(16).slice(2, 8)
+  return `/${(Math.random() + Math.random()).toString(16).slice(2, 8)}/`
 }
 
 module.exports = setFrontmatter
