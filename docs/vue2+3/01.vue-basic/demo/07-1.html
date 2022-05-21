@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>事件的基本使用</title>
+  <!-- 引入 Vue -->
+  <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+  <!-- 准备好一个容器-->
+  <div id="root">
+    <h2>欢迎来到{{name}}学习</h2>
+    <!-- <button v-on:click="showInfo">点我提示信息</button> -->
+    <button @click="showInfo1">点我提示信息 1（不传参）</button>
+    <button @click="showInfo2($event,66)">点我提示信息 2（传参）</button>
+  </div>
+</body>
+
+<script type="text/javascript">
+  Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
+
+  const vm = new Vue({
+    el: '#root',
+    data: {
+      name: '尚硅谷',
+    },
+    methods: {
+      showInfo1(event) {
+        // console.log(event.target.innerText)
+        // console.log(this) //此处的 this 是 vm
+        alert('同学你好！')
+      },
+      showInfo2(event, number) {
+        console.log(event, number)
+        // console.log(event.target.innerText)
+        // console.log(this) //此处的 this 是 vm
+        alert('同学你好！！')
+      }
+    }
+  })
+</script>
+
+</html>

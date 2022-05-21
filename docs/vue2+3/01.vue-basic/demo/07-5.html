@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>事件修饰符</title>
+  <!-- 引入 Vue -->
+  <script type="text/javascript" src="../js/vue.js"></script>
+  <style>
+    .demo1 {
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      background-color: skyblue;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 准备好一个容器-->
+  <div id="root">
+    <h2>欢迎来到{{name}}学习</h2>
+    <h3>使用事件的冒泡模式（默认）</h3>
+    <div class="demo1" @click="showInfo(1)">
+      <button @click="showInfo(2)">点我提示信息</button>
+    </div>
+    <h3>使用事件的捕获模式</h3>
+    <div class="demo1" @click.capture="showInfo(1)">
+      <button @click="showInfo(2)">点我提示信息</button>
+    </div>
+  </div>
+</body>
+
+<script type="text/javascript">
+  Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
+
+  new Vue({
+    el: '#root',
+    data: {
+      name: '尚硅谷'
+    },
+    methods: {
+      showInfo(msg) {
+        alert(msg)
+      }
+    }
+  })
+</script>
+
+</html>

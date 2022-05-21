@@ -3,9 +3,7 @@
 @import '~styles/scroll.styl'
 
 // 自定义类样式
-html,
-body,
-#app
+html, body, #app
   width 100%
   height 100%
 
@@ -31,12 +29,16 @@ body,
 // 修改 default theme 样式
 table
   display table
+
   tr
     border none
+
     &:nth-child(2n)
       background inherit
+
   th, td
     border none
+
 .page
   .theme-default-content
     & > table
@@ -46,37 +48,47 @@ table
       font-size 14px
       margin-bottom 45px
       line-height 1.5em
+
       strong
         font-weight 400
+
       th
         text-align left
         white-space nowrap
         color #909399
         font-weight 400
+
       td
         color #606266
+
       td, th
         border-bottom 1px solid #dcdfe6
         padding 15px
         max-width 250px
+
         &:first-child
           padding-left 10px
 
 .theme-default-content
-  pre, pre[class*="language-"]
+  pre, pre[class*='language-']
     margin -0.35rem 0
+
     code
       color #000
 
-div[class*="language-"]:before
+div[class*='language-']:before
   color #999
 
 .custom-block.details
-  div[class*="language-"]
-    margin-top 1em
+  div[class*='language-']
+    margin-top 1rem
 
 pre.language-text
-  white-space: pre-wrap;
+  white-space pre-wrap
+
+.theme-default-content:not(.custom)
+  & > h1, h2, h3, h4, h5, h6
+    margin-bottom 2rem
 
 // 修改 ElementUI 样式
 .el-dialog__header
