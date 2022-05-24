@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>模板中使用第三方对象</title>
+  <!-- 引入 Vue -->
+  <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+  <!-- 准备好一个容器-->
+  <div id="root">
+    <button @click="window.alert(1)">alert</button>
+    <button @click="log">console.log</button>
+  </div>
+</body>
+
+<script type="text/javascript">
+  Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
+
+  const vm = new Vue({
+    el: '#root',
+    data: {
+      window
+    },
+    methods: {
+      log() {
+        console.log(111)
+      }
+    }
+  })
+</script>
+
+</html>
