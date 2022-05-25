@@ -7,7 +7,7 @@ actionText: 开始学习 →
 actionLink: /8f9f1a/
 features:
 - title: 尚硅谷 Vue2.0+Vue3.0 全套教程
-  details: 尚硅谷Vue技术全家桶教程震撼发布！本课程对Vue2和Vue3中的各项核心技术，以及周边技术都进行了详细的讲解，一套课程让你精通Vue技术栈，让前端开发如丝般顺滑！
+  details: 尚硅谷 Vue 技术全家桶教程震撼发布！本课程对 Vue2 和 Vue3 中的各项核心技术，以及周边技术都进行了详细的讲解，一套课程让你精通 Vue 技术栈，让前端开发如丝般顺滑！
 - title: ElementUI
   details: 网站快速成型工具。Element，一套为开发者、设计师和产品经理准备的基于 Vue 2.0 的桌面端组件库
 - title: Markdown
