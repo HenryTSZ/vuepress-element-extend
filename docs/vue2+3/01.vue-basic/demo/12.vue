@@ -1,0 +1,39 @@
+<template>
+  <div>
+    <h2>当前的 n 值是:{{ n }}</h2>
+    <button @click="n++">点我 n+1</button>
+    <button @click="n--">点我 n-1</button>
+    <br />
+    <h2>使用 v-show 做条件渲染</h2>
+    <div v-show="n === 1">欢迎来到{{ name }}</div>
+    <div v-show="1 === 1">欢迎来到{{ name }}</div>
+
+    <h2>使用 v-if 做条件渲染</h2>
+    <div v-if="n === 1">欢迎来到{{ name }}</div>
+    <div v-if="1 === 1">欢迎来到{{ name }}</div>
+
+    <h2>v-else 和 v-else-if</h2>
+    <div v-if="n === 1">Angular</div>
+    <div v-else-if="n === 2">React</div>
+    <div v-else-if="n === 3">Vue</div>
+    <div v-else>哈哈</div>
+
+    <h2>v-if 与 template 的配合使用</h2>
+    <template v-if="n === 1">
+      <div>你好</div>
+      <div>尚硅谷</div>
+      <div>北京</div>
+    </template>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      name: '尚硅谷',
+      n: 0
+    }
+  }
+}
+</script>
