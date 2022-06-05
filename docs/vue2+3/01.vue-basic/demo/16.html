@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>过滤器</title>
+  <script type="text/javascript" src="../js/vue.js"></script>
+  <script type="text/javascript" src="../js/dayjs.min.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <h2>显示格式化后的时间</h2>
+    <!-- 计算属性实现 -->
+    <h3>现在是：{{fmtTime}}</h3>
+    <!-- methods 实现 -->
+    <h3>现在是：{{getFmtTime()}}</h3>
+    <!-- 过滤器实现 -->
+    <h3>现在是：{{time | timeFormatter}}</h3>
+    <!-- 过滤器实现（传参） -->
+    <h3>现在是：{{time | timeFormatter('YYYY_MM_DD') | mySlice}}</h3>
+    <h3 :x="msg | mySlice">尚硅谷</h3>
+  </div>
+
+  <div id="root2">
+    <h2>{{msg | mySlice}}</h2>
+  </div>
+</body>
+
+<script type="text/javascript">
+  Vue.config.productionTip = false
+  //全局过滤器
+  Vue.filter('mySlice', function (value) {
+    return value.slice(0, 4)
+  })
+
+  new Vue({
+    el: '#root',
+    data: {
+      time: 1621561377603, //时间戳
+      msg: '你好，尚硅谷'
+    },
+    computed: {
+      fmtTime() {
+        return dayjs(this.time).format('YYYY 年 MM 月 DD 日 HH:mm:ss')
+      }
+    },
+    methods: {
+      getFmtTime() {
+        return dayjs(this.time).format('YYYY 年 MM 月 DD 日 HH:mm:ss')
+      }
+    },
+    //局部过滤器
+    filters: {
+      timeFormatter(value, str = 'YYYY 年 MM 月 DD 日 HH:mm:ss') {
+        // console.log('@',value)
+        return dayjs(value).format(str)
+      }
+    }
+  })
+
+  new Vue({
+    el: '#root2',
+    data: {
+      msg: 'hello,atguigu!'
+    }
+  })
+</script>
+
+</html>
