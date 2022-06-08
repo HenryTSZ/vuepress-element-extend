@@ -1,5 +1,5 @@
 <template>
-  <el-input v-model="model" v-bind="$attrs" @input="_input" v-on="listeners">
+  <el-input v-model="model" v-bind="$attrs" v-on="listeners">
     <slot v-for="(value, key) in $slots" :name="key" :slot="key"></slot>
   </el-input>
 </template>
@@ -27,10 +27,6 @@ export default {
       //保留小数位数
       type: [Number, String],
       default: 2 //默认两位小数
-    },
-    Event: {
-      type: String,
-      default: 'input'
     }
   },
   data() {
@@ -41,7 +37,7 @@ export default {
   },
   computed: {
     listeners() {
-      return { ...this.$listeners, [this.Event]: this._input }
+      return { ...this.$listeners, input: this._input }
     },
     regs() {
       return {
@@ -61,8 +57,11 @@ export default {
     }
   },
   watch: {
-    value(n) {
-      this.temporary = n
+    value(n, o) {
+      // 新旧值不一样；或者 length 不一样，比如 6 和 06
+      if (n != o || `${n}`.length !== `${o}`.length) {
+        this.temporary = n
+      }
     },
     temporary(n, o) {
       n = n + ''
