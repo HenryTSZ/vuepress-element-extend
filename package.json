@@ -17,6 +17,7 @@
   "dependencies": {
     "dayjs": "^1.11.2",
     "element-ui": "^2.13.2",
+    "nanoid": "^4.0.0",
     "vue": "^2.5.16"
   },
   "devDependencies": {
