@@ -20,7 +20,8 @@
     "element-ui": "^2.13.2",
     "nanoid": "^4.0.0",
     "pubsub-js": "^1.9.4",
-    "vue": "^2.5.16"
+    "vue": "^2.5.16",
+    "vue-resource": "^1.5.3"
   },
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.5.4",
