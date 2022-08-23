@@ -8,6 +8,7 @@
 
 <script>
 export default {
+  name: 'Demo10-5',
   data() {
     return {
       firstName: '张',

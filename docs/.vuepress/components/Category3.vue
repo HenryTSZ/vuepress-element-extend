@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'Category',
+  name: 'Category3',
   props: ['title'],
   data() {
     return {

@@ -12,6 +12,7 @@
 
 <script>
 export default {
+  name: '02-1',
   data() {
     return {
       msg: '你好啊！'

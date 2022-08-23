@@ -10,6 +10,7 @@
 
 <script>
 export default {
+  name: 'App',
   methods: {
     saveData() {
       sessionStorage.setItem('msg', 'hello!!!')

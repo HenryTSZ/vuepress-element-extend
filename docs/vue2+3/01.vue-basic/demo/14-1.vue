@@ -2,8 +2,8 @@
   <div>
     <h2>人员列表</h2>
     <p>点击一个按钮测试功能后，如需测试另一个按钮的功能，请先刷新页面</p>
-    <button @click="updateMei">更新马冬梅的信息(奏效)</button>
-    <button @click="updateMei2">更新马冬梅的信息(不奏效)</button>
+    <button @click="updateMei">更新马冬梅的信息 (奏效)</button>
+    <button @click="updateMei2">更新马冬梅的信息 (不奏效)</button>
     <ul>
       <li v-for="p of persons" :key="p.id">{{ p.name }}-{{ p.age }}-{{ p.sex }}</li>
     </ul>
@@ -12,6 +12,7 @@
 
 <script>
 export default {
+  name: 'Demo14-1',
   data() {
     return {
       persons: [

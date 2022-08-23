@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'MyList',
+  name: 'MyList2',
   //声明接收 App 传递过来的数据
   props: ['todos']
 }

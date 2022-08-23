@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: 'MyItem',
+  name: 'MyItem3',
   //声明接收 todo
   props: ['todo'],
   methods: {

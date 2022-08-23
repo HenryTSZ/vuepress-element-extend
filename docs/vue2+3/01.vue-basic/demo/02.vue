@@ -11,6 +11,7 @@
 
 <script>
 export default {
+  name: 'Demo2',
   data() {
     return {
       name: 'jack',

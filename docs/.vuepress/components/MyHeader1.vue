@@ -12,7 +12,7 @@
 <script>
 import { nanoid } from 'nanoid'
 export default {
-  name: 'MyHeader',
+  name: 'MyHeader1',
   data() {
     return {
       //收集用户输入的 title

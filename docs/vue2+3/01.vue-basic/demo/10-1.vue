@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  name: 'Demo10-1',
   data() {
     return {
       isHot: true

@@ -34,6 +34,7 @@
 
 <script>
 export default {
+  name: 'Demo13-3',
   data() {
     return {
       persons: [

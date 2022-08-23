@@ -8,6 +8,7 @@
 
 <script>
 export default {
+  name: 'School',
   data() {
     return {
       schoolName: '尚硅谷',

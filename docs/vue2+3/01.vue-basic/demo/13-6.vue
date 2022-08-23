@@ -16,6 +16,7 @@
 
 <script>
 export default {
+  name: 'Demo13-6',
   data() {
     return {
       keyWord: '',

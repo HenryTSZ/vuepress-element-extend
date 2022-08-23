@@ -27,6 +27,7 @@
 
 <script>
 export default {
+  name: 'Demo14-4',
   data() {
     return {
       student: {

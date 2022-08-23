@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'MyFooter',
+  name: 'MyFooter1',
   props: ['todos'],
   computed: {
     //总数

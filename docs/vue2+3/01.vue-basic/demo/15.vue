@@ -38,6 +38,7 @@
 
 <script>
 export default {
+  name: 'Demo15',
   data() {
     return {
       userInfo: {

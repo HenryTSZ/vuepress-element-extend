@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'School',
+  name: 'School5',
   props: ['getSchoolName'],
   data() {
     return {

@@ -7,6 +7,7 @@
 
 <script>
 export default {
+  name: 'Demo7-10',
   data() {
     return {
       name: '尚硅谷'

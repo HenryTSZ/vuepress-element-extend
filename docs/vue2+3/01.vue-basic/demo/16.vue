@@ -17,6 +17,7 @@
 const dayjs = require('dayjs')
 
 export default {
+  name: 'Demo16',
   data() {
     return {
       time: 1621561377603, //时间戳

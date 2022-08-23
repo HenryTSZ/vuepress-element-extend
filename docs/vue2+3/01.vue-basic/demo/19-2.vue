@@ -1,14 +1,15 @@
 <template>
   <div>
     <h2 v-text="n"></h2>
-    <h2>当前的n值是：{{ n }}</h2>
-    <button @click="add">点我n+1</button>
-    <button @click="bye">点我销毁vm</button>
+    <h2>当前的 n 值是：{{ n }}</h2>
+    <button @click="add">点我 n+1</button>
+    <button @click="bye">点我销毁 vm</button>
   </div>
 </template>
 
 <script>
 export default {
+  name: 'Demo19-2',
   data() {
     return {
       n: 1
@@ -26,7 +27,7 @@ export default {
   },
   watch: {
     n() {
-      console.log('n变了')
+      console.log('n 变了')
     }
   },
   beforeCreate() {

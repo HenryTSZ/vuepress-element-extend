@@ -4,6 +4,7 @@
 
 <script>
 export default {
+  name: 'Demo4',
   data() {
     console.log('@@@', this) //此处的 this 是 Vue 实例对象
     return {

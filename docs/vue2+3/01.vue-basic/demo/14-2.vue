@@ -6,6 +6,7 @@
 
 <script>
 export default {
+  name: 'Demo14-2',
   created() {
     let data = {
       name: '尚硅谷',

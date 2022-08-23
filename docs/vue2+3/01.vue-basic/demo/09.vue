@@ -7,6 +7,7 @@
 
 <script>
 export default {
+  name: 'Demo9',
   data() {
     return { window }
   },

@@ -1,10 +1,10 @@
 <template>
   <div>
     <h2>{{ name }}</h2>
-    <h2>当前的n值是：<span v-text="n"></span></h2>
-    <!-- <h2>放大10倍后的n值是：<span v-big-number="n"></span> </h2> -->
-    <h2>放大10倍后的n值是：<span v-big="n"></span></h2>
-    <button @click="n++">点我n+1</button>
+    <h2>当前的 n 值是：<span v-text="n"></span></h2>
+    <!-- <h2>放大 10 倍后的 n 值是：<span v-big-number="n"></span> </h2> -->
+    <h2>放大 10 倍后的 n 值是：<span v-big="n"></span></h2>
+    <button @click="n++">点我 n+1</button>
     <hr />
     <input type="text" v-fbind:value="n" />
   </div>
@@ -12,6 +12,7 @@
 
 <script>
 export default {
+  name: 'Demo18-1',
   data() {
     return {
       name: '尚硅谷',
@@ -19,13 +20,13 @@ export default {
     }
   },
   directives: {
-    //big函数何时会被调用？1.指令与元素成功绑定时（一上来）。2.指令所在的模板被重新解析时。
+    //big 函数何时会被调用？1.指令与元素成功绑定时（一上来）。2.指令所在的模板被重新解析时。
     /* 'big-number'(element,binding){
         // console.log('big')
         element.innerText = binding.value * 10
       }, */
     big(element, binding) {
-      console.log('big', this) //注意此处的this是window
+      console.log('big', this) //注意此处的 this 是 window
       // console.log('big')
       element.innerText = binding.value * 10
     },

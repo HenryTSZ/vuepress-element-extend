@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'Student',
+  name: 'Student6',
   data() {
     return {
       name: '张三',

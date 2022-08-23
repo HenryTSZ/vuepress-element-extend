@@ -8,6 +8,7 @@
 
 <script>
 export default {
+  name: 'Demo17-5',
   data() {
     return { n: 1 }
   }

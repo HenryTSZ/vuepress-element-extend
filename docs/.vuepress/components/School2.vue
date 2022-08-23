@@ -10,7 +10,7 @@
 import { hunhe, hunhe2 } from '../mixin'
 
 export default {
-  name: 'School',
+  name: 'School2',
   data() {
     return {
       name: '尚硅谷',

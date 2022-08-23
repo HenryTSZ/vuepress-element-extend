@@ -11,7 +11,7 @@
 	import Student from './Student.vue'
 
 	export default {
-		name:'App',
+		name:'App1',
 		components:{
 			School,
 			Student

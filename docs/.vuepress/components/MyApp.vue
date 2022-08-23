@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'App',
+  name: 'MyApp',
   data() {
     return {
       //由于 todos 是 MyHeader 组件和 MyFooter 组件都在使用，所以放在 App 中（状态提升）
