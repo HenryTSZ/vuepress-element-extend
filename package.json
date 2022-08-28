@@ -29,6 +29,7 @@
     "json2yaml": "^1.1.0",
     "less": "^3.12.2",
     "less-loader": "^7.0.0",
-    "vuepress": "^1.5.4"
+    "vuepress": "^1.5.4",
+    "vuepress-plugin-demo-container-v2": "^2.3.4"
   }
 }

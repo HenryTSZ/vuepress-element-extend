@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>当前求和为：{{ $store.state.sum }}</h1>
+    <h3>当前求和放大 10 倍为：{{ $store.getters.bigSum }}</h3>
     <select v-model.number="n">
       <option value="1">1</option>
       <option value="2">2</option>
@@ -36,7 +37,7 @@ export default {
     }
   },
   mounted() {
-    console.log('Count', this)
+    console.log('Count', this.$store)
   }
 }
 </script>

@@ -41,9 +41,7 @@ const mutations = {
 }
 //准备 state——用于存储数据
 const state = {
-  sum: 0, //当前的和
-  school: '尚硅谷',
-  subject: '前端'
+  sum: 0 //当前的和
 }
 //准备 getters——用于将 state 中的数据进行加工
 const getters = {
