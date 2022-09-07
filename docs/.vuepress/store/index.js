@@ -2,6 +2,8 @@
 import Vue from 'vue'
 //引入 Vuex
 import Vuex from 'vuex'
+import countOptions from './count'
+import personOptions from './person'
 //应用 Vuex 插件
 Vue.use(Vuex)
 
@@ -37,13 +39,18 @@ const mutations = {
   JIAN(state, value) {
     console.log('mutations 中的 JIAN 被调用了')
     state.sum -= value
+  },
+  ADD_PERSON(state, value) {
+    console.log('mutations 中的 ADD_PERSON 被调用了')
+    state.personList.unshift(value)
   }
 }
 //准备 state——用于存储数据
 const state = {
   sum: 0, //当前的和
   school: '尚硅谷',
-  subject: '前端'
+  subject: '前端',
+  personList: [{ id: '001', name: '张三' }]
 }
 //准备 getters——用于将 state 中的数据进行加工
 const getters = {
@@ -57,5 +64,9 @@ export default new Vuex.Store({
   actions,
   mutations,
   state,
-  getters
+  getters,
+  modules: {
+    countAbout: countOptions,
+    personAbout: personOptions
+  }
 })
